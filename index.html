@@ -37,7 +37,7 @@
       color: var(--text-main);
     }
 
-    /* HEADER UTAMA DI PALING ATAS */
+    /* HEADER */
     header {
       height: 62px;
       min-height: 62px;
@@ -97,6 +97,9 @@
     .btn-primary { background: linear-gradient(135deg, #38bdf8, #0284c7); color: #07111f; box-shadow: 0 2px 8px rgba(56, 189, 248, 0.3); }
     .btn-primary:hover { background: linear-gradient(135deg, #7dd3fc, #0369a1); color: #000; }
 
+    .btn-save-html { background: linear-gradient(135deg, #10b981, #047857); color: #fff; box-shadow: 0 2px 8px rgba(16, 185, 129, 0.35); }
+    .btn-save-html:hover { background: linear-gradient(135deg, #34d399, #065f46); color: #fff; }
+
     .btn-outline { background-color: rgba(255, 255, 255, 0.04); border-color: var(--border-color); color: var(--text-main); }
     .btn-outline:hover { background-color: rgba(255, 255, 255, 0.09); border-color: #475569; color: #fff; }
 
@@ -106,7 +109,7 @@
     .btn-danger { background: linear-gradient(135deg, #ef4444, #dc2626); color: #fff; }
     .btn-danger:hover { background: linear-gradient(135deg, #f87171, #b91c1c); }
 
-    /* LAYOUT 3 KOLOM */
+    /* WORKSPACE 3 KOLOM */
     .workspace {
       display: flex;
       flex-direction: row;
@@ -520,6 +523,23 @@
       border: 1px solid rgba(212, 175, 55, 0.85);
     }
 
+    /* BADGE HARI (OTOMATIS HILANG KOTAKNYA SAAT KOSONG) */
+    .badge-day {
+      font-size: 11px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+      display: inline-block;
+      transition: all 0.2s ease;
+    }
+
+    .badge-day:empty {
+      display: none !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+
     /* 10 TEMA */
     .theme-emerald { background: radial-gradient(circle at top right, #064e3b, #022c22 80%); color: #f8fafc; }
     .theme-emerald .badge-day { background-color: #38bdf8; color: #022c22; font-weight: 800; }
@@ -576,14 +596,13 @@
     .theme-slate-light .preview-handle { color: #0f172a; }
 
     .card-top { display: flex; justify-content: space-between; align-items: center; }
-    .badge-day { font-size: 11px; padding: 5px 12px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.7px; }
     .series-label { font-size: 11px; color: #94a3b8; letter-spacing: 0.8px; text-transform: uppercase; font-weight: 700; }
     
     .card-center { margin: auto 0; display: flex; flex-direction: column; gap: 12px; }
     .preview-category { font-size: 11.5px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.7px; }
     .preview-headline { font-size: 21px; line-height: 1.34; font-weight: 800; color: #ffffff; text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7); }
     .preview-explanation { font-size: 13.5px; line-height: 1.55; color: #e2e8f0; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6); }
-    .preview-legal { border-left: 3.5px solid; padding: 8px 12px; font-size: 12px; border-radius: 0 6px 6px 0; line-height: 1.45; font-weight: 600; backdrop-filter: blur(6px); }
+    .preview-legal { border-left: 3.5px solid; padding: 8px 12px; font-size: 12px; border-radius: 0 6px 6px 0; line-height: 1.45; font-weight: 600; }
 
     .card-bottom { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255, 255, 255, 0.15); padding-top: 14px; font-size: 12px; color: #94a3b8; }
     .preview-handle { font-weight: 700; color: #f1f5f9; display: flex; align-items: center; gap: 8px; }
@@ -613,7 +632,7 @@
     <div class="top-actions">
       <button class="btn btn-primary" onclick="openImportModal()"><i class="fa-solid fa-file-import"></i> Import Data (JSON/CSV)</button>
       <button class="btn btn-outline" onclick="exportDataCSV()"><i class="fa-solid fa-file-csv"></i> Unduh Template CSV</button>
-      <button class="btn btn-outline" onclick="exportDataJSON()"><i class="fa-solid fa-download"></i> Ekspor JSON</button>
+      <button class="btn btn-save-html" onclick="saveAsHTML()"><i class="fa-solid fa-file-code"></i> Simpan Aplikasi (.HTML)</button>
       <button class="btn btn-accent" onclick="copyAIPrompt()"><i class="fa-solid fa-wand-magic-sparkles"></i> Salin Prompt AI</button>
       <button class="btn btn-primary" onclick="downloadImage()"><i class="fa-solid fa-image"></i> Unduh PNG Card</button>
     </div>
@@ -632,6 +651,11 @@
         </div>
       </div>
       <ul class="day-list" id="dayList"></ul>
+      <div style="padding: 10px 14px; border-top: 1px solid var(--border-color); background: rgba(0,0,0,0.2);">
+        <button type="button" class="btn btn-outline" style="width: 100%; font-size: 11px; justify-content: center;" onclick="resetToDefaultData()">
+          <i class="fa-solid fa-arrow-rotate-left"></i> Pulihkan 30 Hari Bawaan
+        </button>
+      </div>
     </aside>
 
     <!-- 2. FORM EDITOR TENGAH -->
@@ -641,7 +665,7 @@
           <span class="badge-day" id="editDayBadge" style="background-color: var(--primary); color: #000; font-weight: bold;">HARI 1</span>
           <span class="editor-title" id="editPageTitle" style="margin-left: 8px;">Edit Konten</span>
         </div>
-        <button type="button" class="btn btn-primary" onclick="saveCurrentDay()">
+        <button type="button" class="btn btn-primary" onclick="saveCurrentDay(true)">
           <i class="fa-solid fa-floppy-disk"></i> Simpan Perubahan
         </button>
       </div>
@@ -735,12 +759,12 @@
       <!-- FORM FIELDS -->
       <div class="form-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
         <div>
-          <label>Label Hari (e.g. HARI 01):</label>
-          <input type="text" class="form-control" id="inputDayLabel">
+          <label>Label Hari (Hapus teks jika ingin hilangkan kotaknya):</label>
+          <input type="text" class="form-control" id="inputDayLabel" placeholder="Kosongkan untuk menyembunyikan kotak hari">
         </div>
         <div>
           <label>Pilar Konten / Seri:</label>
-          <input type="text" class="form-control" id="inputPillar">
+          <input type="text" class="form-control" id="inputPillar" placeholder="e.g. #MELEKHUKUM">
         </div>
       </div>
 
@@ -795,6 +819,7 @@
         <input type="text" class="form-control" id="inputHandle">
       </div>
 
+      <!-- FORM UPLOAD LOGO -->
       <div class="form-group">
         <label>Ganti Logo LBH Cakra:</label>
         <div style="display: flex; gap: 12px; align-items: center;">
@@ -806,6 +831,7 @@
         </div>
       </div>
 
+      <!-- 10 TEMA -->
       <div class="form-group">
         <label>Pilihan Tema Warna Visual (10 Pilihan):</label>
         <div class="theme-grid">
@@ -838,6 +864,7 @@
           <div class="card-top">
             <div class="brand-header-wrap">
               <img src="" class="card-logo-img" id="cardLogoTop" alt="Logo LBH Cakra">
+              <!-- BADGE HARI (OTOMATIS HILANG SAAT KOSONG) -->
               <span class="badge-day" id="previewDayBadge">HARI 01</span>
             </div>
             <span class="series-label" id="previewPillar">#MELEKHUKUM</span>
@@ -880,7 +907,7 @@
       <div class="drop-zone" onclick="document.getElementById('fileUploadInput').click()">
         <i class="fa-solid fa-cloud-arrow-up" style="font-size: 34px; color: var(--primary); margin-bottom: 8px;"></i>
         <p style="font-size: 13px; font-weight: 600;">Klik untuk memilih file CSV / JSON</p>
-        <span style="font-size: 11px; color: var(--text-muted);">Mendukung format CSV multiline dari Excel / Google Sheets</span>
+        <span style="font-size: 11px; color: var(--text-muted);">Mendukung format CSV koma / titik koma dari Excel & Google Sheets</span>
       </div>
       <input type="file" id="fileUploadInput" accept=".json, .csv" style="display: none;" onchange="handleFileUpload(event)">
 
@@ -911,7 +938,7 @@
       'gold-aura': 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="500" viewBox="0 0 400 500"><defs><radialGradient id="aur" cx="50%" cy="35%" r="60%"><stop offset="0%" stop-color="%23fbbf24" stop-opacity="0.45"/><stop offset="70%" stop-color="%23d97706" stop-opacity="0.15"/><stop offset="100%" stop-color="%23000" stop-opacity="0"/></radialGradient></defs><rect width="400" height="500" fill="url(%23aur)"/><g fill="%23fef08a" opacity="0.5"><circle cx="80" cy="120" r="3"/><circle cx="320" cy="180" r="4"/><circle cx="150" cy="290" r="2.5"/><circle cx="270" cy="90" r="2"/><circle cx="210" cy="380" r="3.5"/><circle cx="60" cy="320" r="2"/></g></svg>'
     };
 
-    // SILABUS RESMI 30 HARI
+    // 30 HARI SILABUS LENGKAP LBH CAKRA
     const defaultData = [
       {
         day: 1, dayLabel: "HARI 01", pillar: "#MELEKHUKUM", category: "HUKUM PERDATA & KETERTIBAN UMUM",
@@ -1155,101 +1182,228 @@
       }
     ];
 
-    let contentLibrary = [...defaultData];
+    let contentLibrary = JSON.parse(JSON.stringify(defaultData));
     let currentSelectedIndex = 0;
     let customExposureImg = null;
+    let currentLogoUrl = defaultLogoSvg;
+    let currentThemeName = "emerald";
 
     // INISIALISASI
     window.addEventListener('DOMContentLoaded', () => {
-      setupLogo(defaultLogoSvg);
+      if (window.__SAVED_STATE__) {
+        const s = window.__SAVED_STATE__;
+        if (Array.isArray(s.contentLibrary) && s.contentLibrary.length > 0) {
+          contentLibrary = s.contentLibrary;
+        }
+        if (typeof s.currentSelectedIndex === 'number') {
+          currentSelectedIndex = s.currentSelectedIndex;
+        }
+        if (s.currentLogoUrl) {
+          currentLogoUrl = s.currentLogoUrl;
+        }
+        if (s.customExposureImg) {
+          customExposureImg = s.customExposureImg;
+        }
+        if (s.activeTheme) {
+          currentThemeName = s.activeTheme;
+        }
+        if (s.opacity !== undefined) document.getElementById('exposureOpacity').value = s.opacity;
+        if (s.blendMode !== undefined) document.getElementById('blendModeSelect').value = s.blendMode;
+        if (s.blur !== undefined) document.getElementById('exposureBlur').value = s.blur;
+        if (s.vignetteMode !== undefined) document.getElementById('bgVignetteMode').value = s.vignetteMode;
+        if (s.bgPreset !== undefined) document.getElementById('bgPresetSelect').value = s.bgPreset;
+      }
+
+      if (!contentLibrary || contentLibrary.length === 0) {
+        contentLibrary = JSON.parse(JSON.stringify(defaultData));
+      }
+
+      setupLogo(currentLogoUrl);
       renderDayList(contentLibrary);
-      loadDayToEditor(0);
+      loadDayToEditor(currentSelectedIndex);
+      setTheme(currentThemeName);
+
+      if (customExposureImg) {
+        const layer = document.getElementById('cardExposureLayer');
+        layer.style.backgroundImage = `url("${customExposureImg}")`;
+        layer.style.backgroundSize = 'cover';
+        layer.style.backgroundPosition = 'center';
+      } else {
+        applyBgPreset();
+      }
       updateExposureStyle();
     });
 
     function setupLogo(url) {
+      currentLogoUrl = url;
       document.getElementById('navLogo').src = url;
       document.getElementById('cardLogoTop').src = url;
       document.getElementById('cardLogoBottom').src = url;
       document.getElementById('formLogoPreview').src = url;
     }
 
+    // UPLOAD LOGO
     function handleLogoUpload(e) {
-      const file = e.target.files && e.target.files.at(0);
+      const file = (e.target.files && e.target.files.length > 0) ? e.target.files[0] : null;
       if (file) {
         const reader = new FileReader();
         reader.onload = function(evt) {
           setupLogo(evt.target.result);
-          showToast("Logo LBH Cakra diperbarui!");
+          showToast("Logo LBH Cakra berhasil diperbarui!");
         };
         reader.readAsDataURL(file);
       }
+      e.target.value = '';
     }
 
-    // RENDER SIDEBAR LIST
+    // UPLOAD FOTO BACKGROUND
+    function handleExposureUpload(e) {
+      const file = (e.target.files && e.target.files.length > 0) ? e.target.files[0] : null;
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          customExposureImg = evt.target.result;
+          document.getElementById('bgPresetSelect').value = 'none';
+          const layer = document.getElementById('cardExposureLayer');
+          layer.style.backgroundImage = `url("${customExposureImg}")`;
+          layer.style.backgroundSize = 'cover';
+          layer.style.backgroundPosition = 'center';
+          updateExposureStyle();
+          showToast("Foto background berhasil di-blend!");
+        };
+        reader.readAsDataURL(file);
+      }
+      e.target.value = '';
+    }
+
+    function removeExposureImage() {
+      customExposureImg = null;
+      document.getElementById('bgPresetSelect').value = 'none';
+      document.getElementById('cardExposureLayer').style.backgroundImage = 'none';
+      document.getElementById('exposureImgInput').value = '';
+      showToast("Foto background dinonaktifkan.");
+    }
+
+    // RENDER DAFTAR SILABUS
     function renderDayList(list) {
       const dayListEl = document.getElementById('dayList');
       dayListEl.innerHTML = '';
-      list.forEach((item, index) => {
+      list.forEach(item => {
+        const realIndex = contentLibrary.indexOf(item);
         const li = document.createElement('li');
-        li.className = `day-item ${index === currentSelectedIndex ? 'active' : ''}`;
-        li.onclick = () => selectDay(index);
+        li.className = `day-item ${realIndex === currentSelectedIndex ? 'active' : ''}`;
+        li.onclick = () => selectDay(realIndex);
         li.innerHTML = `
           <div class="day-meta">
-            <span class="day-num">${item.dayLabel}</span>
-            <span class="day-category">${item.category}</span>
+            <span class="day-num">${item.dayLabel || 'HARI -'}</span>
+            <span class="day-category">${item.category || 'UMUM'}</span>
           </div>
-          <div class="day-title">${item.headline}</div>
+          <div class="day-title">${item.headline || '(Tanpa Judul)'}</div>
         `;
         dayListEl.appendChild(li);
       });
     }
 
     function selectDay(index) {
+      if (index < 0 || index >= contentLibrary.length) index = 0;
       currentSelectedIndex = index;
       renderDayList(contentLibrary);
       loadDayToEditor(index);
     }
 
     function filterDays() {
-      const q = document.getElementById('searchInput').value.toLowerCase();
+      const q = document.getElementById('searchInput').value.toLowerCase().trim();
+      if (!q) {
+        renderDayList(contentLibrary);
+        return;
+      }
       const filtered = contentLibrary.filter(item => 
-        item.headline.toLowerCase().includes(q) ||
-        item.category.toLowerCase().includes(q) ||
-        item.legal.toLowerCase().includes(q) ||
+        (item.headline && item.headline.toLowerCase().includes(q)) ||
+        (item.category && item.category.toLowerCase().includes(q)) ||
+        (item.legal && item.legal.toLowerCase().includes(q)) ||
         (item.detailedNarration && item.detailedNarration.toLowerCase().includes(q))
       );
       renderDayList(filtered);
     }
 
-    // LOAD KE EDITOR
+    function resetToDefaultData() {
+      if (confirm("Kembalikan 30 topik hukum asli LBH Cakra?")) {
+        contentLibrary = JSON.parse(JSON.stringify(defaultData));
+        currentSelectedIndex = 0;
+        document.getElementById('searchInput').value = '';
+        renderDayList(contentLibrary);
+        loadDayToEditor(0);
+        showToast("30 Topik Bawaan Berhasil Dipulihkan!");
+      }
+    }
+
+    // LOAD KE FORM EDITOR & UPDATE PREVIEW
     function loadDayToEditor(index) {
-      const item = contentLibrary.at(index);
+      if (index < 0 || index >= contentLibrary.length) index = 0;
+      const item = contentLibrary[index];
       if (!item) return;
 
-      document.getElementById('editDayBadge').innerText = item.dayLabel;
-      document.getElementById('editPageTitle').innerText = item.headline;
+      document.getElementById('editDayBadge').innerText = item.dayLabel || `HARI ${index + 1}`;
+      document.getElementById('editPageTitle').innerText = item.headline || 'Edit Konten';
 
-      document.getElementById('inputDayLabel').value = item.dayLabel;
-      document.getElementById('inputPillar').value = item.pillar;
-      document.getElementById('inputCategory').value = item.category;
-      document.getElementById('inputHeadline').value = item.headline;
-      document.getElementById('inputExplanation').value = item.explanation;
+      document.getElementById('inputDayLabel').value = item.dayLabel || '';
+      document.getElementById('inputPillar').value = item.pillar || '';
+      document.getElementById('inputCategory').value = item.category || '';
+      document.getElementById('inputHeadline').value = item.headline || '';
+      document.getElementById('inputExplanation').value = item.explanation || '';
       document.getElementById('inputDetailedNarration').value = item.detailedNarration || '';
       document.getElementById('inputScenePrompt').value = item.scenePrompt || '';
-      document.getElementById('inputLegal').value = item.legal;
+      document.getElementById('inputLegal').value = item.legal || '';
       document.getElementById('inputHandle').value = "@lbhcakra.official";
 
       updateLivePreview();
     }
 
+    // UPDATE REAL-TIME (JIKA TEKS KOSONG, KOTAK HILANG)
     function updateLivePreview() {
-      document.getElementById('previewDayBadge').innerText = document.getElementById('inputDayLabel').value;
-      document.getElementById('previewPillar').innerText = document.getElementById('inputPillar').value;
-      document.getElementById('previewCategory').innerText = document.getElementById('inputCategory').value;
+      const dayInputVal = document.getElementById('inputDayLabel').value.trim();
+      const badgeDayEl = document.getElementById('previewDayBadge');
+      
+      // Fitur khusus: Jika teks hari dihapus, kotak biru langsung hilang
+      if (dayInputVal) {
+        badgeDayEl.innerText = dayInputVal;
+        badgeDayEl.style.display = 'inline-block';
+      } else {
+        badgeDayEl.innerText = '';
+        badgeDayEl.style.display = 'none';
+      }
+
+      // Sembunyikan elemen jika teks sengaja dikosongkan
+      const pillarVal = document.getElementById('inputPillar').value.trim();
+      const pillarEl = document.getElementById('previewPillar');
+      if (pillarVal) {
+        pillarEl.innerText = pillarVal;
+        pillarEl.style.display = 'block';
+      } else {
+        pillarEl.style.display = 'none';
+      }
+
+      const catVal = document.getElementById('inputCategory').value.trim();
+      const catEl = document.getElementById('previewCategory');
+      if (catVal) {
+        catEl.innerText = catVal;
+        catEl.style.display = 'block';
+      } else {
+        catEl.style.display = 'none';
+      }
+
       document.getElementById('previewHeadline').innerText = document.getElementById('inputHeadline').value;
       document.getElementById('previewExplanation').innerText = document.getElementById('inputExplanation').value;
-      document.getElementById('previewLegal').innerText = "⚖️ " + document.getElementById('inputLegal').value;
+
+      const legalVal = document.getElementById('inputLegal').value.trim();
+      const legalEl = document.getElementById('previewLegal');
+      if (legalVal) {
+        legalEl.innerText = "⚖️ " + legalVal;
+        legalEl.style.display = 'block';
+      } else {
+        legalEl.style.display = 'none';
+      }
+
       document.getElementById('handleText').innerText = document.getElementById('inputHandle').value;
     }
 
@@ -1257,8 +1411,9 @@
       document.getElementById(id).addEventListener('input', updateLivePreview);
     });
 
-    function saveCurrentDay() {
-      const item = contentLibrary.at(currentSelectedIndex);
+    function saveCurrentDay(showNotice = true) {
+      if (!contentLibrary[currentSelectedIndex]) return;
+      const item = contentLibrary[currentSelectedIndex];
       item.dayLabel = document.getElementById('inputDayLabel').value;
       item.pillar = document.getElementById('inputPillar').value;
       item.category = document.getElementById('inputCategory').value;
@@ -1269,7 +1424,7 @@
       item.legal = document.getElementById('inputLegal').value;
 
       renderDayList(contentLibrary);
-      showToast("Perubahan hari ini berhasil disimpan!");
+      if (showNotice) showToast("Perubahan hari ini berhasil disimpan!");
     }
 
     // EXPOSURE & BLEND
@@ -1296,41 +1451,27 @@
       const layer = document.getElementById('cardExposureLayer');
       if (preset !== 'none' && bgPresets[preset]) {
         layer.style.backgroundImage = `url('${bgPresets[preset]}')`;
-        showToast("Preset background diterapkan!");
+        layer.style.backgroundSize = 'cover';
+        layer.style.backgroundPosition = 'center';
       } else if (customExposureImg) {
         layer.style.backgroundImage = `url('${customExposureImg}')`;
+        layer.style.backgroundSize = 'cover';
+        layer.style.backgroundPosition = 'center';
       } else {
         layer.style.backgroundImage = 'none';
       }
     }
 
-    function handleExposureUpload(e) {
-      const file = e.target.files && e.target.files.at(0);
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function(evt) {
-          customExposureImg = evt.target.result;
-          document.getElementById('bgPresetSelect').value = 'none';
-          document.getElementById('cardExposureLayer').style.backgroundImage = `url('${customExposureImg}')`;
-          updateExposureStyle();
-          showToast("Foto background berhasil di-blend!");
-        };
-        reader.readAsDataURL(file);
-      }
-    }
-
-    function removeExposureImage() {
-      customExposureImg = null;
-      document.getElementById('bgPresetSelect').value = 'none';
-      document.getElementById('cardExposureLayer').style.backgroundImage = 'none';
-      document.getElementById('exposureImgInput').value = '';
-      showToast("Foto background dinonaktifkan.");
-    }
-
     function setTheme(themeName, el) {
+      currentThemeName = themeName;
       const canvas = document.getElementById('igCanvas');
       canvas.className = `ig-canvas theme-${themeName}`;
-      document.querySelectorAll('.theme-opt').forEach(opt => opt.classList.remove('active'));
+      document.querySelectorAll('.theme-opt').forEach(opt => {
+        opt.classList.remove('active');
+        if (opt.getAttribute('onclick') && opt.getAttribute('onclick').includes(`'${themeName}'`)) {
+          opt.classList.add('active');
+        }
+      });
       if (el) el.classList.add('active');
     }
 
@@ -1346,7 +1487,7 @@
     }
 
     function copyCaption() {
-      const item = contentLibrary.at(currentSelectedIndex);
+      const item = contentLibrary[currentSelectedIndex];
       const handle = document.getElementById('inputHandle').value;
       const narration = document.getElementById('inputDetailedNarration').value || item.detailedNarration || item.explanation;
 
@@ -1381,29 +1522,126 @@ Follow ${handle} untuk edukasi dan panduan hukum praktis setiap hari.
       copyScenePrompt();
     }
 
+    // FITUR UNDUH KARTU PNG (DIPERBAIKI DENGAN SISTEM CLONE & FALLBACK BEBAS TAINT)
     function downloadImage() {
       const canvasCard = document.getElementById('igCanvas');
-      showToast("Sedang merender PNG...");
-      
+      if (!canvasCard) return;
+
+      if (typeof html2canvas === 'undefined') {
+        showToast("Memuat modul render... silakan klik unduh sekali lagi.");
+        const s = document.createElement('script');
+        s.src = "https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js";
+        s.onload = () => downloadImage();
+        document.head.appendChild(s);
+        return;
+      }
+
+      showToast("Sedang merender PNG resolusi tinggi...");
+
+      const rawDayLabel = document.getElementById('inputDayLabel').value.trim();
+      const dayLabel = (rawDayLabel || 'Card').replace(/[^a-zA-Z0-9_-]/g, '_');
+      const filename = `LBH_CAKRA_${dayLabel}_Feed_4x5.png`;
+
       html2canvas(canvasCard, {
-        scale: 3,
+        scale: 2.5,
         useCORS: true,
-        allowTaint: true,
-        backgroundColor: null
+        allowTaint: false,
+        backgroundColor: null,
+        logging: false,
+        onclone: (clonedDoc) => {
+          // Bersihkan backdrop-filter yang sering menyebabkan html2canvas gagal
+          clonedDoc.querySelectorAll('*').forEach(el => {
+            if (el.style) {
+              el.style.backdropFilter = 'none';
+              el.style.webkitBackdropFilter = 'none';
+            }
+          });
+        }
       }).then(canvas => {
-        const link = document.createElement('a');
-        const dayLabel = document.getElementById('inputDayLabel').value.replace(/\s+/g, '_');
-        link.download = `LBH_CAKRA_${dayLabel}_Feed_4x5.png`;
-        link.href = canvas.toDataURL('image/png');
-        link.click();
-        showToast("Kartu PNG berhasil diunduh!");
+        if (canvas.toBlob) {
+          canvas.toBlob(blob => {
+            if (!blob) {
+              triggerDirectDataDownload(canvas, filename);
+              return;
+            }
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.download = filename;
+            link.href = url;
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+            setTimeout(() => URL.revokeObjectURL(url), 1000);
+            showToast("Kartu PNG Berhasil Diunduh!");
+          }, 'image/png');
+        } else {
+          triggerDirectDataDownload(canvas, filename);
+        }
       }).catch(err => {
-        console.error(err);
-        showToast("Gagal merender gambar.");
+        console.error("Gagal render utama, mencoba fallback:", err);
+        // Fallback render dengan background solid
+        html2canvas(canvasCard, {
+          scale: 2,
+          useCORS: true,
+          allowTaint: false,
+          backgroundColor: '#050811'
+        }).then(fallbackCanvas => {
+          triggerDirectDataDownload(fallbackCanvas, filename);
+          showToast("Kartu PNG Berhasil Diunduh!");
+        }).catch(errFinal => {
+          console.error("Render gagal:", errFinal);
+          alert("Gagal merender gambar PNG. Pastikan menggunakan browser versi terbaru (Chrome/Edge).");
+        });
       });
     }
 
-    // EKSPOR CSV LENGKAP TEMPLATE (MENDUKUNG NARASI & PROMPT MULTILINE RFC 4180 + EXCEL UTF-8 BOM)
+    function triggerDirectDataDownload(canvas, filename) {
+      const dataUrl = canvas.toDataURL('image/png');
+      const link = document.createElement('a');
+      link.download = filename;
+      link.href = dataUrl;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      showToast("Kartu PNG Berhasil Diunduh!");
+    }
+
+    // FITUR SAVE AS HTML MANDIRI (MEMPERMANENKAN SEMUA DATA & GAMBAR KE FILE HTML)
+    function saveAsHTML() {
+      saveCurrentDay(false);
+
+      const stateData = {
+        contentLibrary: contentLibrary,
+        currentSelectedIndex: currentSelectedIndex,
+        activeTheme: currentThemeName,
+        currentLogoUrl: currentLogoUrl,
+        customExposureImg: customExposureImg,
+        opacity: document.getElementById('exposureOpacity').value,
+        blendMode: document.getElementById('blendModeSelect').value,
+        blur: document.getElementById('exposureBlur').value,
+        vignetteMode: document.getElementById('bgVignetteMode').value,
+        bgPreset: document.getElementById('bgPresetSelect').value
+      };
+
+      let htmlContent = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+      htmlContent = htmlContent.replace(/<script id="savedStateInjection">[\s\S]*?<\/script>/gi, '');
+
+      // Serialization anti-script injection break
+      const safeJson = JSON.stringify(stateData).replace(/<\/script/gi, '<\\/script');
+      const stateScript = '<script id="savedStateInjection">\n    window.__SAVED_STATE__ = ' + safeJson + ';\n  <\/script>';
+      htmlContent = htmlContent.replace('</body>', stateScript + '\n</body>');
+
+      const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8;' });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "LBH_CAKRA_Studio_30_Hari.html";
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      showToast("Aplikasi & seluruh data berhasil disimpan sebagai file HTML!");
+    }
+
+    // EKSPOR CSV TEMPLATE (RFC 4180 + UTF-8 BOM EXCEL)
     function exportDataCSV() {
       const headers = ["Day", "DayLabel", "Pillar", "Category", "Headline", "Explanation", "DetailedNarration", "Legal", "ScenePrompt"];
       let csvContent = "\uFEFF" + headers.join(",") + "\r\n";
@@ -1430,25 +1668,27 @@ Follow ${handle} untuk edukasi dan panduan hukum praktis setiap hari.
       document.body.appendChild(link);
       link.click();
       link.remove();
-      showToast("Template CSV (Narasi & Prompt) Berhasil Diunduh!");
-    }
-
-    function exportDataJSON() {
-      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(contentLibrary, null, 2));
-      const link = document.createElement('a');
-      link.href = dataStr;
-      link.download = "LBH_CAKRA_Kalender_30_Hari.json";
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      showToast("Data JSON berhasil diekspor!");
+      showToast("Template CSV Berhasil Diunduh!");
     }
 
     function openImportModal() { document.getElementById('importModal').classList.add('show'); }
     function closeImportModal() { document.getElementById('importModal').classList.remove('show'); }
 
-    // PARSER CSV MULTILINE STANDAR RFC 4180
+    // DETEKSI OTOMATIS PEMISAH CSV (KOMA ATAU TITIK KOMA EXCEL INDONESIA)
+    function detectDelimiter(text) {
+      const firstLine = text.split(/\r\n|\r|\n/)[0] || '';
+      const commaCount = (firstLine.match(/,/g) || []).length;
+      const semicolonCount = (firstLine.match(/;/g) || []).length;
+      const tabCount = (firstLine.match(/\t/g) || []).length;
+
+      if (semicolonCount > commaCount && semicolonCount > tabCount) return ';';
+      if (tabCount > commaCount && tabCount > semicolonCount) return '\t';
+      return ',';
+    }
+
+    // PARSER CSV MULTILINE RFC 4180
     function parseCSV(text) {
+      const delim = detectDelimiter(text);
       const result = [];
       let row = [];
       let currentVal = '';
@@ -1465,7 +1705,7 @@ Follow ${handle} untuk edukasi dan panduan hukum praktis setiap hari.
           } else {
             inQuotes = !inQuotes;
           }
-        } else if (char === ',' && !inQuotes) {
+        } else if (char === delim && !inQuotes) {
           row.push(currentVal.trim());
           currentVal = '';
         } else if ((char === '\r' || char === '\n') && !inQuotes) {
@@ -1473,7 +1713,7 @@ Follow ${handle} untuk edukasi dan panduan hukum praktis setiap hari.
             i++;
           }
           row.push(currentVal.trim());
-          if (row.length > 1 || (row.length === 1 && row.at(0) !== '')) {
+          if (row.length > 1 || (row.length === 1 && row[0] !== '')) {
             result.push(row);
           }
           row = [];
@@ -1485,7 +1725,7 @@ Follow ${handle} untuk edukasi dan panduan hukum praktis setiap hari.
 
       if (currentVal !== '' || row.length > 0) {
         row.push(currentVal.trim());
-        if (row.length > 1 || (row.length === 1 && row.at(0) !== '')) {
+        if (row.length > 1 || (row.length === 1 && row[0] !== '')) {
           result.push(row);
         }
       }
@@ -1493,9 +1733,9 @@ Follow ${handle} untuk edukasi dan panduan hukum praktis setiap hari.
       return result;
     }
 
-    // PROSES IMPORT FILE CSV / JSON
+    // HANDLER IMPORT FILE (CSV / JSON)
     function handleFileUpload(e) {
-      const file = e.target.files && e.target.files.at(0);
+      const file = (e.target.files && e.target.files.length > 0) ? e.target.files[0] : null;
       if (!file) return;
 
       const reader = new FileReader();
@@ -1512,27 +1752,26 @@ Follow ${handle} untuk edukasi dan panduan hukum praktis setiap hari.
               showToast(`Berhasil mengimpor ${contentLibrary.length} hari dari JSON!`);
             }
           } else {
-            // Parsing CSV dengan dukungan paragraf baris baru di dalam tanda kutip
             const parsedRows = parseCSV(text);
             if (parsedRows.length <= 1) {
-              alert("File CSV kosong atau tidak memiliki data.");
+              alert("File CSV kosong atau tidak memiliki data baris.");
               return;
             }
 
             const newContent = [];
-            // Mulai dari baris ke-1 (lewati baris header 0)
             for (let i = 1; i < parsedRows.length; i++) {
-              const cols = parsedRows.at(i);
-              if (cols && cols.length >= 5) {
-                const dayNum = parseInt(cols.at(0)) || i;
-                const dLabel = cols.at(1) || `HARI ${dayNum < 10 ? '0' + dayNum : dayNum}`;
-                const dPillar = cols.at(2) || '#MELEKHUKUM';
-                const dCategory = cols.at(3) || 'HUKUM UMUM';
-                const dHeadline = cols.at(4) || '';
-                const dExplanation = cols.at(5) || '';
-                const dNarration = cols.at(6) || '';
-                const dLegal = cols.at(7) || '';
-                const dScene = cols.at(8) || '';
+              const cols = parsedRows[i];
+              if (cols && cols.length >= 4) {
+                const [cDay, cLabel, cPillar, cCat, cHeadline, cExplanation, cNarration, cLegal, cScene] = cols;
+                const dayNum = parseInt(cDay) || i;
+                const dLabel = cLabel || `HARI ${dayNum < 10 ? '0' + dayNum : dayNum}`;
+                const dPillar = cPillar || '#MELEKHUKUM';
+                const dCategory = cCat || 'HUKUM UMUM';
+                const dHeadline = cHeadline || '';
+                const dExplanation = cExplanation || '';
+                const dNarration = cNarration || '';
+                const dLegal = cLegal || '';
+                const dScene = cScene || '';
 
                 newContent.push({
                   day: dayNum,
@@ -1564,12 +1803,17 @@ Follow ${handle} untuk edukasi dan panduan hukum praktis setiap hari.
         }
       };
       reader.readAsText(file);
+      e.target.value = '';
     }
 
     function showToast(text) {
       const toast = document.getElementById('toastMsg');
       document.getElementById('toastText').innerText = text;
       toast.style.display = 'block';
+      setTimeout(() => { toast.style.display = 'none'; }, 2600);
+    }
+  </script>
+
       setTimeout(() => { toast.style.display = 'none'; }, 2600);
     }
   </script>
