@@ -828,6 +828,22 @@
         <textarea class="form-control" id="inputExplanation" rows="3" placeholder="Uraian masalah hukum..."></textarea>
       </div>
 
+      <!-- KOTAK PROMPT AI KHUSUS ADEGAN VISUAL NARASI KASUS -->
+      <div class="form-group" style="background: rgba(139, 92, 246, 0.08); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 9px; padding: 12px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+          <label style="color: #c4b5fd; font-weight: 700; margin-bottom: 0;">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> Prompt AI Generator Gambar (Adegan Narasi Kasus)
+          </label>
+          <button type="button" class="btn btn-accent" style="font-size: 11px; padding: 3px 8px;" onclick="copyScenePrompt()">
+            <i class="fa-regular fa-copy"></i> Salin Prompt Ini
+          </button>
+        </div>
+        <p style="font-size: 11.5px; color: #a78bfa; margin-bottom: 6px;">
+          Prompt bahasa Inggris siap pakai untuk <strong>Midjourney, ChatGPT DALL-E, Bing Image Creator, Flux</strong>. Dibuat khusus memvisualisasikan adegan kejadian nyata dari narasi di atas.
+        </p>
+        <textarea class="form-control" id="inputScenePrompt" rows="3" style="font-size: 12.5px; color: #f5f3ff; background: #0f172a;" placeholder="Prompt AI deskripsi adegan visual kasus..."></textarea>
+      </div>
+
       <div class="form-group">
         <label>Dasar Hukum & Pasal</label>
         <input type="text" class="form-control" id="inputLegal" placeholder="Contoh: Pasal 1365 KUHPerdata & Perda Daerah">
@@ -1014,6 +1030,39 @@
       { day: 30, pillar: "Minggu 5: Penegakan Hukum & Tips", category: "Bantuan Hukum Gratis", headline: "Nggak Punya Uang Sewa Pengacara? Negara Sediakan Gratis!", explanation: "Masyarakat tidak mampu berhak atas bantuan hukum gratis (pro bono) lewat Lembaga Bantuan Hukum (LBH) terakreditasi.", legal: "UU No. 16 Tahun 2011 tentang Bantuan Hukum" }
     ];
 
+    const defaultScenePrompts = {
+    "1": "A modern editorial illustration of a suburban neighborhood street, a parked car carelessly blocking the front iron gate and driveway of a neighbor's modern house, driver unable to exit, clear property boundary line, subtle floating justice scales, clean vibrant vector style, 8k --ar 4:5",
+    "2": "A clean split-screen editorial infographic illustration showing a suburban property fence, side A shows overgrown tree branches from neighbor's garden hanging over the fence into private yard with a person trimming branches, side B shows underground tree roots breaking concrete driveway, modern architectural style, bright daylight, 8k --ar 4:5",
+    "3": "A modern concept illustration of a residential neighborhood with thick grey smoke billowing from a neighbor burning garbage in an open backyard barrel, causing pollution to adjacent house with closed windows, realistic environmental scene with subtle law symbol, moody atmospheric lighting, 8k --ar 4:5",
+    "4": "A nighttime conceptual illustration of a suburban house with glowing windows and loud neon soundwaves emitting karaoke music at midnight, neighboring house with person in bed covering ears in frustration, dark ambient blue night with vibrant soundwave contrast, 8k --ar 4:5",
+    "5": "An editorial illustration of a domestic dog escaping through a neighbor's broken garden fence and knocking over expensive ceramic plant pots in a private courtyard, owner rushing to apologize, civil liability concept, clean detailed vector art, 8k --ar 4:5",
+    "6": "A high quality illustration of a motorcycle rider pulled over by a traffic police officer on an urban road for a traffic ticket citation, vehicle owner in thought bubble wondering about legal responsibility, bright sunny road atmosphere, realistic clean style, 8k --ar 4:5",
+    "7": "A clean isometric illustration of a public residential road blocked off by a colorful Indonesian wedding tent canopy (tenda hajatan), detour traffic signs directing cars around the blocked street, police permit badge icon floating, 8k --ar 4:5",
+    "8": "A smartphone screen in first-person view secretly recording a person's face in a public cafe for social media viral content, holographic warning lock and digital privacy shield icon blinking, modern cyber law aesthetic, dark moody tones, 8k --ar 4:5",
+    "9": "A dramatic cyber privacy concept illustration of a smartphone screen showing aggressive debt collection spam messages, multiple contact lists being leaked into a dark matrix network, cyber law shield defending data, dark neon teal and red glowing tones, 8k --ar 4:5",
+    "10": "A consumer holding a smartphone submitting a 1-star negative review with photo proof of a damaged product, balance scale weighing 'Truthful Consumer Feedback' versus 'Defamation Lawsuit', clean modern digital commerce aesthetic, 8k --ar 4:5",
+    "11": "A conceptual illustration of a smartphone displaying an open private messaging chat with a pair of digital scissors cutting a screenshot and sharing it onto social media timeline, privacy violation warning hologram, sleek futuristic design, 8k --ar 4:5",
+    "12": "A social media feed interface showing rumor text 'Spill The Tea' with anonymous comments spreading false accusations, gavel striking the digital screen with defamation law penalty icon, dark moody cyber aesthetic, 8k --ar 4:5",
+    "13": "A digital creator at a computer workstation copying and pasting a professional copyrighted photograph from search engine into commercial advertisement without credit, intellectual property copyright warning symbol glowing in gold, clean isometric 3D render, 8k --ar 4:5",
+    "14": "A cybersecurity concept illustration showing a laptop keyboard with dark hooded hacker silhouette breaking into a verified social media account, broken padlock and glowing cyber police handcuffs, dark blue and neon cyan lighting, 8k --ar 4:5",
+    "15": "An employer's office desk with human resources manager locking an employee's original university diploma certificate inside a steel safe drawer, employment contract paper and legal justice scales in background, corporate office setting, 8k --ar 4:5",
+    "16": "An office worker sitting at a desk illuminated only by computer screen working late at night past regular hours, clock on the wall showing 10 PM, overtime pay calculation sheets and labor regulation law document on desk, moody cinematic lighting, 8k --ar 4:5",
+    "17": "A close-up of an official signed handwritten debt loan promissory note agreement on a wooden table without postage revenue stamp (tanpa materai), valid legal contract seal and pen, warm professional legal atmosphere, 8k --ar 4:5",
+    "18": "A smartphone banking mobile app displaying a surprise accidental high-value wire transfer into bank account, bank teller window and criminal legal consequences icon in background, clean high-tech fintech illustration, 8k --ar 4:5",
+    "19": "An empty office chair and abandoned corporate desk badge of an employee who suddenly resigned without notice (ghosting), employment PKWT contract agreement highlighting breach of contract compensation clause, dramatic office lighting, 8k --ar 4:5",
+    "20": "A corporate board room setting where an employee is handed a sudden unilateral employment termination letter, bilateral negotiation table and labor law protection emblem glowing, professional corporate atmosphere, 8k --ar 4:5",
+    "21": "A fingerprint attendance biometric scanner at office entrance showing a co-worker scanning fake attendance ID card for an absent colleague, red violation alert flashing, corporate disciplinary action concept, 8k --ar 4:5",
+    "22": "An opened online shopping cardboard package delivered to doorstep containing a cracked damaged electronic gadget, disappointed customer holding smartphone requesting refund under consumer protection rights, clean e-commerce vector style, 8k --ar 4:5",
+    "23": "A retail store receipt sticker showing small print disclaimer 'Goods Sold Cannot Be Returned or Exchanged', overlaid with a red legal stamp stating 'Null and Void (Batal Demi Hukum)', balance of consumer justice, 8k --ar 4:5",
+    "24": "An architectural blueprint of a new residential house alongside a formal housing purchase agreement (PPJB), down payment currency stack with contractual refund clause, clean real estate law illustration, 8k --ar 4:5",
+    "25": "A cross-section illustration of a rented residential house showing structural roof leak vs daily minor wear and tear, landlord and tenant discussing repair maintenance responsibilities, clear visual comparison, 8k --ar 4:5",
+    "26": "A traditional certificate of land title (Sertifikat Tanah) resting on a mahogany desk with family heritage boedel tree, several heir silhouettes standing together indicating unanimous mutual consent required for sale, 8k --ar 4:5",
+    "27": "A dark street market corner where an individual attempts to sell an unboxed high-end smartphone at an impossibly low suspicious price, police sirens and criminal fencing (penadahan) law gavel looming in shadows, 8k --ar 4:5",
+    "28": "An elegant antique wooden desk with a person's hand writing an authentic holographic handwritten last will and testament using a fountain pen, sealing wax stamp and notary legal folder nearby, classic formal aesthetic, 8k --ar 4:5",
+    "29": "A traffic police officer standing beside a driver's car window holding two distinct citation tickets: Blue Slip (quick bank transfer fine) and Red Slip (court trial hearing), clear educational comparison, sunny highway atmosphere, 8k --ar 4:5",
+    "30": "A welcoming, bright legal aid office of LBH Cakra providing free pro bono legal consultation to an underprivileged citizen, open law books, warm respectful justice atmosphere, glowing gold scales of justice, professional 8k --ar 4:5"
+};
+
     let contentLibrary = JSON.parse(localStorage.getItem('legal30DaysContent')) || defaultData;
     let currentSelectedIndex = 0;
     let customExposureImageUri = localStorage.getItem('lbhCustomExposureBg') || '';
@@ -1026,6 +1075,7 @@
     const inputExplanation = document.getElementById('inputExplanation');
     const inputLegal = document.getElementById('inputLegal');
     const inputHandle = document.getElementById('inputHandle');
+    const inputScenePrompt = document.getElementById('inputScenePrompt');
 
     const previewDayBadge = document.getElementById('previewDayBadge');
     const previewPillar = document.getElementById('previewPillar');
@@ -1070,6 +1120,7 @@
       inputHeadline.value = data.headline || "";
       inputExplanation.value = data.explanation || "";
       inputLegal.value = data.legal || "";
+      inputScenePrompt.value = data.scenePrompt || defaultScenePrompts[data.day] || generateDynamicPrompt(data);
       editDayBadge.textContent = `Hari ${String(data.day).padStart(2, '0')}`;
 
       updatePreview();
@@ -1101,7 +1152,8 @@
         category: inputCategory.value,
         headline: inputHeadline.value,
         explanation: inputExplanation.value,
-        legal: inputLegal.value
+        legal: inputLegal.value,
+        scenePrompt: inputScenePrompt.value
       };
       localStorage.setItem('legal30DaysContent', JSON.stringify(contentLibrary));
       renderDayList();
@@ -1240,15 +1292,25 @@ Follow ${inputHandle.value} untuk terus mendapatkan wawasan hukum praktis sehari
       });
     }
 
-    function copyAIPrompt() {
-      const item = contentLibrary[currentSelectedIndex];
-      const day = String(item.day).padStart(2, '0');
-      
-      const promptAI = `Instagram feed 4:5 legal education post, premium law firm microblog aesthetic for LBH Cakra, double exposure blend effect with dark emerald background and subtle courtroom / legal atmosphere, featuring an elegant circular golden emblem of justice scales and owl over open book, sharp Indonesian legal typography, 8k resolution --ar 4:5 --v 6.0`;
-
-      navigator.clipboard.writeText(promptAI).then(() => {
-        showToast(`Prompt AI Hari ${day} berhasil disalin!`);
+    // Fungsi untuk menyalin prompt gambar adegan narasi aktif
+    function copyScenePrompt() {
+      const promptText = inputScenePrompt.value || defaultScenePrompts[contentLibrary[currentSelectedIndex].day] || generateDynamicPrompt(contentLibrary[currentSelectedIndex]);
+      const day = String(contentLibrary[currentSelectedIndex].day).padStart(2, '0');
+      navigator.clipboard.writeText(promptText).then(() => {
+        showToast(`Prompt Gambar Adegan Narasi Kasus Hari ${day} berhasil disalin!`);
       });
+    }
+
+    // Tombol di header atas juga menyalin prompt adegan narasi yang sangat spesifik
+    function copyAIPrompt() {
+      copyScenePrompt();
+    }
+
+    // Generator dinamis jika pengguna membuat topik baru di luar daftar default
+    function generateDynamicPrompt(item) {
+      const headline = item.headline || "Legal case discussion";
+      const explanation = item.explanation || "Law regulation and rights";
+      return `A detailed conceptual editorial illustration of Indonesian legal case: "${headline}", visual scene representing: ${explanation}, modern suburban property and legal justice concept, split layout or clean isometric perspective, soft cinematic lighting with emerald green and dark slate ambient, high resolution 3D vector art, 8k --ar 4:5 --v 6.0`;
     }
 
     function handleLogoUpload(event) {
