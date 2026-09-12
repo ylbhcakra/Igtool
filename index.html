@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LBH CAKRA - 30 Hari Instagram Studio</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Montserrat:wght@400;600;700;800&family=Playfair+Display:wght@400;600;700;800&family=Merriweather:wght@400;700;900&family=Oswald:wght@400;600;700&family=Raleway:wght@400;600;700;800&family=Lora:wght@400;600;700&family=Nunito:wght@400;700;800&family=Roboto+Slab:wght@400;600;700&family=Bebas+Neue&family=Cormorant+Garamond:wght@400;600;700&family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <style>
     :root {
@@ -410,6 +413,39 @@
       border: 1.5px solid rgba(255, 255, 255, 0.4);
     }
 
+    /* GRID FONT */
+    .font-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .font-opt {
+      padding: 9px 6px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      font-size: 13px;
+      text-align: center;
+      cursor: pointer;
+      font-weight: 600;
+      background: var(--panel-bg);
+      color: #cbd5e1;
+      transition: all 0.2s;
+    }
+
+    .font-opt:hover {
+      border-color: #64748b;
+      transform: translateY(-2px);
+    }
+
+    .font-opt.active {
+      border-color: var(--primary);
+      color: #fff;
+      background-color: rgba(56, 189, 248, 0.14);
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
+    }
+
     /* KOLOM 3: PREVIEW KANAN */
     .preview-panel {
       width: 480px;
@@ -594,6 +630,111 @@
     .theme-slate-light .preview-legal { background: rgba(2, 132, 199, 0.12); border-left-color: #0284c7; color: #0369a1; }
     .theme-slate-light .card-bottom { border-top-color: #e2e8f0; color: #64748b; }
     .theme-slate-light .preview-handle { color: #0f172a; }
+
+    /* 15 TEMA TAMBAHAN */
+    .theme-ocean-teal { background: radial-gradient(circle at top right, #0f766e, #032b28 85%); color: #f0fdfa; }
+    .theme-ocean-teal .badge-day { background-color: #2dd4bf; color: #032b28; font-weight: 800; }
+    .theme-ocean-teal .preview-category { color: #5eead4; }
+    .theme-ocean-teal .preview-legal { background: rgba(45, 212, 191, 0.15); border-left-color: #2dd4bf; color: #99f6e4; }
+
+    .theme-rose-gold { background: radial-gradient(circle at top right, #881337, #2a0a15 85%); color: #fff1f2; }
+    .theme-rose-gold .badge-day { background-color: #f9a8d4; color: #500724; font-weight: 800; }
+    .theme-rose-gold .preview-category { color: #fbcfe8; }
+    .theme-rose-gold .preview-legal { background: rgba(249, 168, 212, 0.15); border-left-color: #f9a8d4; color: #fce7f3; }
+
+    .theme-volcanic-ash { background: linear-gradient(155deg, #292524, #0c0a09); color: #fafaf9; }
+    .theme-volcanic-ash .badge-day { background-color: #f87171; color: #1c1917; font-weight: 800; }
+    .theme-volcanic-ash .preview-category { color: #fca5a5; }
+    .theme-volcanic-ash .preview-legal { background: rgba(248, 113, 113, 0.15); border-left-color: #f87171; color: #fecaca; }
+
+    .theme-arctic-blue { background: linear-gradient(160deg, #eff6ff, #dbeafe); color: #0c1e3d; border: 1px solid #bfdbfe; }
+    .theme-arctic-blue .badge-day { background-color: #2563eb; color: #ffffff; font-weight: 800; }
+    .theme-arctic-blue .preview-category { color: #1d4ed8; }
+    .theme-arctic-blue .preview-headline { color: #0c1e3d !important; text-shadow: none !important; }
+    .theme-arctic-blue .preview-explanation { color: #1e3a5f !important; text-shadow: none !important; }
+    .theme-arctic-blue .preview-legal { background: rgba(37, 99, 235, 0.1); border-left-color: #2563eb; color: #1d4ed8; }
+    .theme-arctic-blue .card-bottom { border-top-color: #bfdbfe; color: #475569; }
+    .theme-arctic-blue .preview-handle { color: #0c1e3d; }
+
+    .theme-mocha-brown { background: radial-gradient(circle at top right, #451a03, #1c0a02 85%); color: #fef3e2; }
+    .theme-mocha-brown .badge-day { background-color: #d4af37; color: #2a1200; font-weight: 800; }
+    .theme-mocha-brown .preview-category { color: #e5c07b; }
+    .theme-mocha-brown .preview-legal { background: rgba(212, 175, 55, 0.15); border-left-color: #d4af37; color: #f3e0b8; }
+
+    .theme-neon-lime { background: radial-gradient(circle at top right, #14290a, #050a02 85%); color: #f7fee7; }
+    .theme-neon-lime .badge-day { background-color: #a3e635; color: #1a2e05; font-weight: 800; }
+    .theme-neon-lime .preview-category { color: #bef264; }
+    .theme-neon-lime .preview-legal { background: rgba(163, 230, 53, 0.15); border-left-color: #a3e635; color: #d9f99d; }
+
+    .theme-deep-maroon { background: radial-gradient(circle at top right, #5c1a1a, #1a0505 85%); color: #fff5f5; }
+    .theme-deep-maroon .badge-day { background-color: #eab308; color: #3f1010; font-weight: 800; }
+    .theme-deep-maroon .preview-category { color: #fde047; }
+    .theme-deep-maroon .preview-legal { background: rgba(234, 179, 8, 0.15); border-left-color: #eab308; color: #fef08a; }
+
+    .theme-steel-gray { background: radial-gradient(circle at top right, #3f4b5c, #12181f 85%); color: #f1f5f9; }
+    .theme-steel-gray .badge-day { background-color: #94a3b8; color: #12181f; font-weight: 800; }
+    .theme-steel-gray .preview-category { color: #cbd5e1; }
+    .theme-steel-gray .preview-legal { background: rgba(148, 163, 184, 0.15); border-left-color: #94a3b8; color: #e2e8f0; }
+
+    .theme-coral-reef { background: linear-gradient(150deg, #9a3412, #431407); color: #fff7ed; }
+    .theme-coral-reef .badge-day { background-color: #2dd4bf; color: #042f2e; font-weight: 800; }
+    .theme-coral-reef .preview-category { color: #5eead4; }
+    .theme-coral-reef .preview-legal { background: rgba(45, 212, 191, 0.15); border-left-color: #2dd4bf; color: #99f6e4; }
+
+    .theme-lavender-mist { background: linear-gradient(160deg, #f3e8ff, #ede9fe); color: #2e1065; border: 1px solid #ddd6fe; }
+    .theme-lavender-mist .badge-day { background-color: #7c3aed; color: #ffffff; font-weight: 800; }
+    .theme-lavender-mist .preview-category { color: #6d28d9; }
+    .theme-lavender-mist .preview-headline { color: #2e1065 !important; text-shadow: none !important; }
+    .theme-lavender-mist .preview-explanation { color: #4c1d95 !important; text-shadow: none !important; }
+    .theme-lavender-mist .preview-legal { background: rgba(124, 58, 237, 0.1); border-left-color: #7c3aed; color: #6d28d9; }
+    .theme-lavender-mist .card-bottom { border-top-color: #ddd6fe; color: #6b7280; }
+    .theme-lavender-mist .preview-handle { color: #2e1065; }
+
+    .theme-amber-gold { background: radial-gradient(circle at top right, #78350f, #2a1102 85%); color: #fffbeb; }
+    .theme-amber-gold .badge-day { background-color: #fbbf24; color: #451a03; font-weight: 800; }
+    .theme-amber-gold .preview-category { color: #fcd34d; }
+    .theme-amber-gold .preview-legal { background: rgba(251, 191, 36, 0.15); border-left-color: #fbbf24; color: #fde68a; }
+
+    .theme-crimson-night { background: radial-gradient(circle at top right, #1a0000, #000000 85%); color: #fef2f2; }
+    .theme-crimson-night .badge-day { background-color: #dc2626; color: #ffffff; font-weight: 800; }
+    .theme-crimson-night .preview-category { color: #f87171; }
+    .theme-crimson-night .preview-legal { background: rgba(220, 38, 38, 0.18); border-left-color: #dc2626; color: #fecaca; }
+
+    .theme-pine-green { background: radial-gradient(circle at top right, #052e16, #01140a 85%); color: #f0fdf4; }
+    .theme-pine-green .badge-day { background-color: #4ade80; color: #052e16; font-weight: 800; }
+    .theme-pine-green .preview-category { color: #86efac; }
+    .theme-pine-green .preview-legal { background: rgba(74, 222, 128, 0.15); border-left-color: #4ade80; color: #bbf7d0; }
+
+    .theme-copper-bronze { background: linear-gradient(150deg, #7c4a1e, #2b1a0a); color: #fdf6ec; }
+    .theme-copper-bronze .badge-day { background-color: #d97706; color: #2b1500; font-weight: 800; }
+    .theme-copper-bronze .preview-category { color: #fbbf24; }
+    .theme-copper-bronze .preview-legal { background: rgba(217, 119, 6, 0.18); border-left-color: #d97706; color: #fde68a; }
+
+    .theme-ivory-cream { background: linear-gradient(160deg, #fffdf7, #fdf6e3); color: #3f2d1c; border: 1px solid #eaddc0; }
+    .theme-ivory-cream .badge-day { background-color: #b45309; color: #ffffff; font-weight: 800; }
+    .theme-ivory-cream .preview-category { color: #92400e; }
+    .theme-ivory-cream .preview-headline { color: #3f2d1c !important; text-shadow: none !important; }
+    .theme-ivory-cream .preview-explanation { color: #5c4630 !important; text-shadow: none !important; }
+    .theme-ivory-cream .preview-legal { background: rgba(180, 83, 9, 0.1); border-left-color: #b45309; color: #92400e; }
+    .theme-ivory-cream .card-bottom { border-top-color: #eaddc0; color: #7a6a55; }
+    .theme-ivory-cream .preview-handle { color: #3f2d1c; }
+
+    /* 15 PILIHAN FONT KARTU */
+    .font-poppins, .font-poppins * { font-family: 'Poppins', sans-serif; }
+    .font-montserrat, .font-montserrat * { font-family: 'Montserrat', sans-serif; }
+    .font-playfair, .font-playfair * { font-family: 'Playfair Display', serif; }
+    .font-merriweather, .font-merriweather * { font-family: 'Merriweather', serif; }
+    .font-oswald, .font-oswald * { font-family: 'Oswald', sans-serif; }
+    .font-raleway, .font-raleway * { font-family: 'Raleway', sans-serif; }
+    .font-lora, .font-lora * { font-family: 'Lora', serif; }
+    .font-nunito, .font-nunito * { font-family: 'Nunito', sans-serif; }
+    .font-roboto-slab, .font-roboto-slab * { font-family: 'Roboto Slab', serif; }
+    .font-bebas, .font-bebas * { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.4px; }
+    .font-cormorant, .font-cormorant * { font-family: 'Cormorant Garamond', serif; }
+    .font-space-grotesk, .font-space-grotesk * { font-family: 'Space Grotesk', sans-serif; }
+    .font-inter, .font-inter * { font-family: 'Inter', sans-serif; }
+    .font-jakarta, .font-jakarta * { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .font-baskerville, .font-baskerville * { font-family: 'Libre Baskerville', serif; }
 
     .card-top { display: flex; justify-content: space-between; align-items: center; }
     .series-label { font-size: 11px; color: #94a3b8; letter-spacing: 0.8px; text-transform: uppercase; font-weight: 700; }
@@ -815,6 +956,11 @@
       </div>
 
       <div class="form-group">
+        <label><i class="fa-solid fa-hashtag"></i> Tagar Caption (pisahkan dengan spasi):</label>
+        <textarea class="form-control" id="inputHashtag" rows="2" placeholder="#edukasihukum #melekhukum #lbhcakra #bantuanhukum #konsultasihukum #hukumindonesia #advokatindonesia #probono"></textarea>
+      </div>
+
+      <div class="form-group">
         <label>Username Instagram / Handle:</label>
         <input type="text" class="form-control" id="inputHandle">
       </div>
@@ -831,9 +977,9 @@
         </div>
       </div>
 
-      <!-- 10 TEMA -->
+      <!-- 25 TEMA -->
       <div class="form-group">
-        <label>Pilihan Tema Warna Visual (10 Pilihan):</label>
+        <label>Pilihan Tema Warna Visual (25 Pilihan):</label>
         <div class="theme-grid">
           <div class="theme-opt active" onclick="setTheme('emerald', this)"><div class="color-swatch" style="background:#064e3b"></div>Emerald Cakra</div>
           <div class="theme-opt" onclick="setTheme('dark-navy', this)"><div class="color-swatch" style="background:#1e293b"></div>Deep Navy</div>
@@ -845,6 +991,44 @@
           <div class="theme-opt" onclick="setTheme('royal-purple', this)"><div class="color-swatch" style="background:#581c87"></div>Royal Purple</div>
           <div class="theme-opt" onclick="setTheme('sunset', this)"><div class="color-swatch" style="background:#7f1d1d"></div>Sunset Crimson</div>
           <div class="theme-opt" onclick="setTheme('slate-light', this)"><div class="color-swatch" style="background:#f8fafc"></div>Clean Light</div>
+          <div class="theme-opt" onclick="setTheme('ocean-teal', this)"><div class="color-swatch" style="background:#0f766e"></div>Ocean Teal</div>
+          <div class="theme-opt" onclick="setTheme('rose-gold', this)"><div class="color-swatch" style="background:#881337"></div>Rose Gold</div>
+          <div class="theme-opt" onclick="setTheme('volcanic-ash', this)"><div class="color-swatch" style="background:#292524"></div>Volcanic Ash</div>
+          <div class="theme-opt" onclick="setTheme('arctic-blue', this)"><div class="color-swatch" style="background:#dbeafe"></div>Arctic Blue</div>
+          <div class="theme-opt" onclick="setTheme('mocha-brown', this)"><div class="color-swatch" style="background:#451a03"></div>Mocha Brown</div>
+          <div class="theme-opt" onclick="setTheme('neon-lime', this)"><div class="color-swatch" style="background:#14290a"></div>Neon Lime</div>
+          <div class="theme-opt" onclick="setTheme('deep-maroon', this)"><div class="color-swatch" style="background:#5c1a1a"></div>Deep Maroon</div>
+          <div class="theme-opt" onclick="setTheme('steel-gray', this)"><div class="color-swatch" style="background:#3f4b5c"></div>Steel Gray</div>
+          <div class="theme-opt" onclick="setTheme('coral-reef', this)"><div class="color-swatch" style="background:#9a3412"></div>Coral Reef</div>
+          <div class="theme-opt" onclick="setTheme('lavender-mist', this)"><div class="color-swatch" style="background:#ede9fe"></div>Lavender Mist</div>
+          <div class="theme-opt" onclick="setTheme('amber-gold', this)"><div class="color-swatch" style="background:#78350f"></div>Amber Gold</div>
+          <div class="theme-opt" onclick="setTheme('crimson-night', this)"><div class="color-swatch" style="background:#1a0000"></div>Crimson Night</div>
+          <div class="theme-opt" onclick="setTheme('pine-green', this)"><div class="color-swatch" style="background:#052e16"></div>Pine Green</div>
+          <div class="theme-opt" onclick="setTheme('copper-bronze', this)"><div class="color-swatch" style="background:#7c4a1e"></div>Copper Bronze</div>
+          <div class="theme-opt" onclick="setTheme('ivory-cream', this)"><div class="color-swatch" style="background:#fdf6e3"></div>Ivory Cream</div>
+        </div>
+      </div>
+
+      <!-- 15 FONT -->
+      <div class="form-group">
+        <label>Pilihan Font Kartu (15 Pilihan + Default):</label>
+        <div class="font-grid">
+          <div class="font-opt active" style="font-family:'Segoe UI',sans-serif" onclick="setFont('default', this)">Default</div>
+          <div class="font-opt" style="font-family:'Poppins',sans-serif" onclick="setFont('poppins', this)">Poppins</div>
+          <div class="font-opt" style="font-family:'Montserrat',sans-serif" onclick="setFont('montserrat', this)">Montserrat</div>
+          <div class="font-opt" style="font-family:'Playfair Display',serif" onclick="setFont('playfair', this)">Playfair</div>
+          <div class="font-opt" style="font-family:'Merriweather',serif" onclick="setFont('merriweather', this)">Merriweather</div>
+          <div class="font-opt" style="font-family:'Oswald',sans-serif" onclick="setFont('oswald', this)">Oswald</div>
+          <div class="font-opt" style="font-family:'Raleway',sans-serif" onclick="setFont('raleway', this)">Raleway</div>
+          <div class="font-opt" style="font-family:'Lora',serif" onclick="setFont('lora', this)">Lora</div>
+          <div class="font-opt" style="font-family:'Nunito',sans-serif" onclick="setFont('nunito', this)">Nunito</div>
+          <div class="font-opt" style="font-family:'Roboto Slab',serif" onclick="setFont('roboto-slab', this)">Roboto Slab</div>
+          <div class="font-opt" style="font-family:'Bebas Neue',sans-serif" onclick="setFont('bebas', this)">Bebas Neue</div>
+          <div class="font-opt" style="font-family:'Cormorant Garamond',serif" onclick="setFont('cormorant', this)">Cormorant</div>
+          <div class="font-opt" style="font-family:'Space Grotesk',sans-serif" onclick="setFont('space-grotesk', this)">Space Grotesk</div>
+          <div class="font-opt" style="font-family:'Inter',sans-serif" onclick="setFont('inter', this)">Inter</div>
+          <div class="font-opt" style="font-family:'Plus Jakarta Sans',sans-serif" onclick="setFont('jakarta', this)">Jakarta Sans</div>
+          <div class="font-opt" style="font-family:'Libre Baskerville',serif" onclick="setFont('baskerville', this)">Baskerville</div>
         </div>
       </div>
     </section>
@@ -1187,6 +1371,7 @@
     let customExposureImg = null;
     let currentLogoUrl = defaultLogoSvg;
     let currentThemeName = "emerald";
+    let currentFontName = "default";
 
     // INISIALISASI
     window.addEventListener('DOMContentLoaded', () => {
@@ -1207,6 +1392,9 @@
         if (s.activeTheme) {
           currentThemeName = s.activeTheme;
         }
+        if (s.activeFont) {
+          currentFontName = s.activeFont;
+        }
         if (s.opacity !== undefined) document.getElementById('exposureOpacity').value = s.opacity;
         if (s.blendMode !== undefined) document.getElementById('blendModeSelect').value = s.blendMode;
         if (s.blur !== undefined) document.getElementById('exposureBlur').value = s.blur;
@@ -1222,6 +1410,7 @@
       renderDayList(contentLibrary);
       loadDayToEditor(currentSelectedIndex);
       setTheme(currentThemeName);
+      setFont(currentFontName);
 
       if (customExposureImg) {
         const layer = document.getElementById('cardExposureLayer');
@@ -1321,6 +1510,7 @@
         (item.headline && item.headline.toLowerCase().includes(q)) ||
         (item.category && item.category.toLowerCase().includes(q)) ||
         (item.legal && item.legal.toLowerCase().includes(q)) ||
+        (item.hashtag && item.hashtag.toLowerCase().includes(q)) ||
         (item.detailedNarration && item.detailedNarration.toLowerCase().includes(q))
       );
       renderDayList(filtered);
@@ -1354,6 +1544,7 @@
       document.getElementById('inputDetailedNarration').value = item.detailedNarration || '';
       document.getElementById('inputScenePrompt').value = item.scenePrompt || '';
       document.getElementById('inputLegal').value = item.legal || '';
+      document.getElementById('inputHashtag').value = item.hashtag || '';
       document.getElementById('inputHandle').value = "@lbhcakra.official";
 
       updateLivePreview();
@@ -1407,7 +1598,7 @@
       document.getElementById('handleText').innerText = document.getElementById('inputHandle').value;
     }
 
-    ['inputDayLabel', 'inputPillar', 'inputCategory', 'inputHeadline', 'inputExplanation', 'inputLegal', 'inputHandle'].forEach(id => {
+    ['inputDayLabel', 'inputPillar', 'inputCategory', 'inputHeadline', 'inputExplanation', 'inputLegal', 'inputHashtag', 'inputHandle'].forEach(id => {
       document.getElementById(id).addEventListener('input', updateLivePreview);
     });
 
@@ -1422,6 +1613,7 @@
       item.detailedNarration = document.getElementById('inputDetailedNarration').value;
       item.scenePrompt = document.getElementById('inputScenePrompt').value;
       item.legal = document.getElementById('inputLegal').value;
+      item.hashtag = document.getElementById('inputHashtag').value;
 
       renderDayList(contentLibrary);
       if (showNotice) showToast("Perubahan hari ini berhasil disimpan!");
@@ -1462,13 +1654,30 @@
       }
     }
 
+    function applyCanvasClasses() {
+      const canvas = document.getElementById('igCanvas');
+      const fontClass = (currentFontName && currentFontName !== 'default') ? ` font-${currentFontName}` : '';
+      canvas.className = `ig-canvas theme-${currentThemeName}${fontClass}`;
+    }
+
     function setTheme(themeName, el) {
       currentThemeName = themeName;
-      const canvas = document.getElementById('igCanvas');
-      canvas.className = `ig-canvas theme-${themeName}`;
+      applyCanvasClasses();
       document.querySelectorAll('.theme-opt').forEach(opt => {
         opt.classList.remove('active');
         if (opt.getAttribute('onclick') && opt.getAttribute('onclick').includes(`'${themeName}'`)) {
+          opt.classList.add('active');
+        }
+      });
+      if (el) el.classList.add('active');
+    }
+
+    function setFont(fontName, el) {
+      currentFontName = fontName;
+      applyCanvasClasses();
+      document.querySelectorAll('.font-opt').forEach(opt => {
+        opt.classList.remove('active');
+        if (opt.getAttribute('onclick') && opt.getAttribute('onclick').includes(`'${fontName}'`)) {
           opt.classList.add('active');
         }
       });
@@ -1490,6 +1699,8 @@
       const item = contentLibrary[currentSelectedIndex];
       const handle = document.getElementById('inputHandle').value;
       const narration = document.getElementById('inputDetailedNarration').value || item.detailedNarration || item.explanation;
+      const hashtagVal = (document.getElementById('inputHashtag').value || item.hashtag || '').trim();
+      const hashtags = hashtagVal || '#edukasihukum #melekhukum #lbhcakra #bantuanhukum #konsultasihukum #hukumindonesia #advokatindonesia #probono';
 
       const caption = `⚖️ ${item.headline}
 (${item.category})
@@ -1504,7 +1715,7 @@ Konsultasikan bersama tim advokat LBH Cakra via DM atau tautan di bio kami!
 
 Follow ${handle} untuk edukasi dan panduan hukum praktis setiap hari.
 
-#edukasihukum #melekhukum #lbhcakra #bantuankukum #konsultasihukum #hukumindonesia #advokatindonesia #probono`;
+${hashtags}`;
 
       navigator.clipboard.writeText(caption).then(() => {
         showToast("Caption IG Lengkap Disalin!");
@@ -1614,6 +1825,7 @@ Follow ${handle} untuk edukasi dan panduan hukum praktis setiap hari.
         contentLibrary: contentLibrary,
         currentSelectedIndex: currentSelectedIndex,
         activeTheme: currentThemeName,
+        activeFont: currentFontName,
         currentLogoUrl: currentLogoUrl,
         customExposureImg: customExposureImg,
         opacity: document.getElementById('exposureOpacity').value,
@@ -1643,7 +1855,7 @@ Follow ${handle} untuk edukasi dan panduan hukum praktis setiap hari.
 
     // EKSPOR CSV TEMPLATE (RFC 4180 + UTF-8 BOM EXCEL)
     function exportDataCSV() {
-      const headers = ["Day", "DayLabel", "Pillar", "Category", "Headline", "Explanation", "DetailedNarration", "Legal", "ScenePrompt"];
+      const headers = ["Day", "DayLabel", "Pillar", "Category", "Headline", "Explanation", "DetailedNarration", "Legal", "Hashtag", "ScenePrompt"];
       let csvContent = "\uFEFF" + headers.join(",") + "\r\n";
 
       contentLibrary.forEach(item => {
@@ -1656,6 +1868,7 @@ Follow ${handle} untuk edukasi dan panduan hukum praktis setiap hari.
           `"${(item.explanation || '').replace(/"/g, '""')}"`,
           `"${(item.detailedNarration || '').replace(/"/g, '""')}"`,
           `"${(item.legal || '').replace(/"/g, '""')}"`,
+          `"${(item.hashtag || '').replace(/"/g, '""')}"`,
           `"${(item.scenePrompt || '').replace(/"/g, '""')}"`
         ];
         csvContent += row.join(",") + "\r\n";
@@ -1762,7 +1975,7 @@ Follow ${handle} untuk edukasi dan panduan hukum praktis setiap hari.
             for (let i = 1; i < parsedRows.length; i++) {
               const cols = parsedRows[i];
               if (cols && cols.length >= 4) {
-                const [cDay, cLabel, cPillar, cCat, cHeadline, cExplanation, cNarration, cLegal, cScene] = cols;
+                const [cDay, cLabel, cPillar, cCat, cHeadline, cExplanation, cNarration, cLegal, cHashtagOrScene, cScene] = cols;
                 const dayNum = parseInt(cDay) || i;
                 const dLabel = cLabel || `HARI ${dayNum < 10 ? '0' + dayNum : dayNum}`;
                 const dPillar = cPillar || '#MELEKHUKUM';
@@ -1771,7 +1984,10 @@ Follow ${handle} untuk edukasi dan panduan hukum praktis setiap hari.
                 const dExplanation = cExplanation || '';
                 const dNarration = cNarration || '';
                 const dLegal = cLegal || '';
-                const dScene = cScene || '';
+                // Dukung template lama (tanpa kolom Hashtag) maupun baru (dengan kolom Hashtag)
+                const hasHashtagCol = cols.length >= 10;
+                const dHashtag = hasHashtagCol ? (cHashtagOrScene || '') : '';
+                const dScene = hasHashtagCol ? (cScene || '') : (cHashtagOrScene || '');
 
                 newContent.push({
                   day: dayNum,
@@ -1782,6 +1998,7 @@ Follow ${handle} untuk edukasi dan panduan hukum praktis setiap hari.
                   explanation: dExplanation,
                   detailedNarration: dNarration,
                   legal: dLegal,
+                  hashtag: dHashtag,
                   scenePrompt: dScene
                 });
               }
@@ -1810,10 +2027,6 @@ Follow ${handle} untuk edukasi dan panduan hukum praktis setiap hari.
       const toast = document.getElementById('toastMsg');
       document.getElementById('toastText').innerText = text;
       toast.style.display = 'block';
-      setTimeout(() => { toast.style.display = 'none'; }, 2600);
-    }
-  </script>
-
       setTimeout(() => { toast.style.display = 'none'; }, 2600);
     }
   </script>
