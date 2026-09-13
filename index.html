@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Montserrat:wght@400;600;700;800&family=Playfair+Display:wght@400;600;700;800&family=Merriweather:wght@400;700;900&family=Oswald:wght@400;600;700&family=Raleway:wght@400;600;700;800&family=Lora:wght@400;600;700&family=Nunito:wght@400;700;800&family=Roboto+Slab:wght@400;600;700&family=Bebas+Neue&family=Cormorant+Garamond:wght@400;600;700&family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Montserrat:wght@400;600;700;800&family=Playfair+Display:wght@400;600;700;800&family=Merriweather:wght@400;700;900&family=Oswald:wght@400;600;700&family=Raleway:wght@400;600;700;800&family=Lora:wght@400;600;700&family=Nunito:wght@400;700;800&family=Roboto+Slab:wght@400;600;700&family=Bebas+Neue&family=Cormorant+Garamond:wght@400;600;700&family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Libre+Baskerville:wght@400;700&family=Archivo+Black&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <style>
     :root {
@@ -719,6 +719,15 @@
     .theme-ivory-cream .card-bottom { border-top-color: #eaddc0; color: #7a6a55; }
     .theme-ivory-cream .preview-handle { color: #3f2d1c; }
 
+    /* TEMA BARU — sesuai contoh referensi (poster hitam pekat + aksen emas/kuning tegas) */
+    .theme-golden-authority { background: linear-gradient(160deg, #0a0a0a, #000000 85%); color: #f8fafc; }
+    .theme-golden-authority .badge-day { background-color: #f5c518; color: #1a1400; font-weight: 800; }
+    .theme-golden-authority .preview-category { color: #f5c518; font-weight: 800; }
+    .theme-golden-authority .preview-headline { color: #ffffff; }
+    .theme-golden-authority .preview-legal { background: rgba(245, 197, 24, 0.14); border-left-color: #f5c518; color: #f5c518; }
+    .theme-golden-authority .card-bottom { border-top-color: rgba(245, 197, 24, 0.25); }
+    .theme-golden-authority .preview-handle { color: #f5c518; }
+
     /* 15 PILIHAN FONT KARTU */
     .font-poppins, .font-poppins * { font-family: 'Poppins', sans-serif; }
     .font-montserrat, .font-montserrat * { font-family: 'Montserrat', sans-serif; }
@@ -735,6 +744,11 @@
     .font-inter, .font-inter * { font-family: 'Inter', sans-serif; }
     .font-jakarta, .font-jakarta * { font-family: 'Plus Jakarta Sans', sans-serif; }
     .font-baskerville, .font-baskerville * { font-family: 'Libre Baskerville', serif; }
+    .font-archivo-black, .font-archivo-black * { font-family: 'Archivo Black', sans-serif; letter-spacing: 0.2px; }
+
+    /* KATA SOROTAN EMAS — ketik **kata** pada Headline untuk membuatnya kuning tebal
+       seperti pada contoh poster referensi (mis: KPK GELEDAH RUMAH BAK ISTANA) */
+    .hl-word { color: #f5c518; font-weight: 900; }
 
     .card-top { display: flex; justify-content: space-between; align-items: center; }
     .series-label { font-size: 11px; color: #94a3b8; letter-spacing: 0.8px; text-transform: uppercase; font-weight: 700; }
@@ -747,6 +761,210 @@
 
     .card-bottom { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255, 255, 255, 0.15); padding-top: 14px; font-size: 12px; color: #94a3b8; }
     .preview-handle { font-weight: 700; color: #f1f5f9; display: flex; align-items: center; gap: 8px; }
+
+    /* ======================================================================
+       20 MODEL TATA LETAK KARTU (LAYOUT) — bukan sekadar ganti warna,
+       tiap model mengubah STRUKTUR & KOMPOSISI kartu agar konten tidak
+       terasa monoton. Bisa dikombinasikan bebas dengan 25 Tema Warna
+       & 15 Font yang sudah ada.
+    ====================================================================== */
+
+    /* 01. KLASIK TENGAH — bawaan aplikasi, teks bertumpuk rapi di tengah */
+    .layout-classic .card-center { margin: auto 0; }
+
+    /* 02. CAPTION BAWAH — gambar dominan penuh, teks duduk di panel gelap bawah (seperti contoh referensi) */
+    .layout-caption-bottom .card-content-wrap { justify-content: flex-end; }
+    .layout-caption-bottom .card-top { position: absolute; top: 26px; left: 24px; right: 24px; }
+    .layout-caption-bottom .card-center { margin: 0; background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 30%, rgba(0,0,0,0.92) 100%); padding: 70px 16px 14px; border-radius: 16px; }
+    .layout-caption-bottom .preview-headline { font-size: 23px; }
+    .layout-caption-bottom .card-bottom { border-top: none; margin-top: 10px; }
+
+    /* 03. HEADLINE ATAS — judul & kategori naik ke atas, ruang bawah lega untuk foto */
+    .layout-headline-top .card-content-wrap { justify-content: flex-start; gap: 20px; }
+    .layout-headline-top .card-top { order: 2; }
+    .layout-headline-top .card-center { margin: 0; order: 1; }
+    .layout-headline-top .card-bottom { order: 3; margin-top: auto; }
+
+    /* 04. KACA BURAM (GLASSMORPHISM) — panel tengah melayang efek kaca es */
+    .layout-glass .card-center { margin: auto 0; background: rgba(255,255,255,0.09); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.22); border-radius: 20px; padding: 22px 20px; box-shadow: 0 8px 32px rgba(0,0,0,0.35); }
+
+    /* 05. BANNER TEBAL — kategori jadi label solid, judul dalam kotak gelap menyatu */
+    .layout-bold-banner .card-center { margin: 0 0 auto 0; gap: 0; }
+    .layout-bold-banner .preview-category { display: inline-block; background: #ffffff; color: #0f172a; padding: 7px 14px; border-radius: 8px 8px 0 0; margin-bottom: 0; }
+    .layout-bold-banner .preview-headline { background: rgba(0,0,0,0.6); padding: 16px 14px 6px; border-radius: 0 12px 12px 12px; margin-bottom: 0; }
+    .layout-bold-banner .preview-explanation { background: rgba(0,0,0,0.6); padding: 0 14px 14px; border-radius: 0 0 12px 12px; margin-top: -2px; }
+
+    /* 06. TAB SAMPING — kategori vertikal menempel di tepi kiri seperti label folder */
+    .layout-side-tab { padding-left: 50px !important; }
+    .layout-side-tab .card-center { position: relative; margin: auto 0; }
+    .layout-side-tab .preview-category { position: absolute; left: -46px; top: 50%; width: 140px; text-align: center; transform: rotate(-90deg) translateX(-50%); transform-origin: left top; background: rgba(0,0,0,0.55); padding: 7px 0; border-radius: 6px; }
+
+    /* 07. BINGKAI ELEGAN — garis bingkai ganda + siku sudut, gaya sertifikat */
+    .layout-frame-elegant { padding: 34px 30px !important; }
+    .layout-frame-elegant::before { content: ""; position: absolute; inset: 12px; border: 1px solid rgba(255,255,255,0.35); pointer-events: none; z-index: 4; }
+    .layout-frame-elegant .card-center { margin: auto 0; text-align: center; }
+    .layout-frame-elegant .preview-legal { display: inline-block; text-align: left; }
+
+    /* 08. MAJALAH — judul raksasa rata kiri dengan garis aksen vertikal */
+    .layout-magazine .card-center { margin: auto 0; padding-left: 16px; border-left: 4px solid rgba(255,255,255,0.85); gap: 10px; }
+    .layout-magazine .preview-headline { font-size: 27px; line-height: 1.18; letter-spacing: -0.3px; }
+    .layout-magazine .preview-category { letter-spacing: 1.5px; }
+
+    /* 09. KUTIPAN (QUOTE) — tanda petik besar dekoratif, judul jadi kutipan italic */
+    .layout-quote .card-center { margin: auto 0; text-align: center; position: relative; }
+    .layout-quote .preview-headline::before { content: "\\201C"; display: block; font-size: 60px; line-height: 0.5; font-weight: 900; opacity: 0.55; margin-bottom: 14px; }
+    .layout-quote .preview-headline { font-style: italic; font-weight: 700; }
+    .layout-quote .preview-explanation { max-width: 88%; margin: 0 auto; }
+
+    /* 10. KORAN (NEWSPAPER) — serif, garis pembatas atas-bawah judul, huruf berjarak */
+    .layout-newspaper .card-center { margin: auto 0; text-align: center; }
+    .layout-newspaper .preview-category { letter-spacing: 2px; }
+    .layout-newspaper .preview-headline { font-family: 'Playfair Display', serif; border-top: 2px solid rgba(255,255,255,0.7); border-bottom: 2px solid rgba(255,255,255,0.7); padding: 12px 0; }
+
+    /* 11. ANGKA STATISTIK — headline ditampilkan besar seperti data/angka penting */
+    .layout-stat-number .card-center { margin: auto 0; text-align: center; }
+    .layout-stat-number .preview-headline { font-size: 34px; line-height: 1.15; font-weight: 900; }
+    .layout-stat-number .preview-explanation { font-size: 14.5px; }
+
+    /* 12. PERINGATAN (ALERT) — panel merah/oranye tegas untuk isu darurat */
+    .layout-alert .card-center { margin: auto 0; background: linear-gradient(135deg, rgba(220,38,38,0.92), rgba(124,10,10,0.92)); padding: 18px 16px; border-radius: 14px; }
+    .layout-alert .preview-headline::before { content: "⚠ "; }
+    .layout-alert .preview-category, .layout-alert .preview-headline, .layout-alert .preview-explanation { color: #fff !important; text-shadow: none; }
+    .layout-alert .preview-legal { background: rgba(255,255,255,0.18) !important; border-left-color: #fff !important; color: #fff !important; }
+
+    /* 13. NEON GLOW — judul menyala dengan efek cahaya neon */
+    .layout-neon .ig-canvas, .layout-neon { box-shadow: 0 0 0 1.5px rgba(255,255,255,0.5), 0 0 35px rgba(56,189,248,0.55), inset 0 0 40px rgba(0,0,0,0.6); }
+    .layout-neon .preview-headline { text-shadow: 0 0 6px rgba(255,255,255,0.85), 0 0 18px currentColor, 0 0 32px currentColor; }
+    .layout-neon .preview-category { text-shadow: 0 0 10px currentColor; }
+
+    /* 14. LENCANA SUDUT — badge hari jadi lingkaran besar menonjol di pojok */
+    .layout-corner-badge .badge-day { position: absolute; top: -14px; left: -14px; width: 68px; height: 68px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 10px; line-height: 1.2; box-shadow: 0 6px 16px rgba(0,0,0,0.5); z-index: 7; }
+    .layout-corner-badge .card-top { position: relative; }
+    .layout-corner-badge .brand-header-wrap { padding-left: 58px; }
+
+    /* 15. PITA (RIBBON) — kategori tampil sebagai pita terlipat di pojok atas */
+    .layout-ribbon .card-top { position: relative; }
+    .layout-ribbon .preview-category { position: absolute; top: -26px; left: -24px; background: #b91c1c; color: #fff !important; padding: 8px 20px 8px 16px; font-size: 10.5px; box-shadow: 0 4px 10px rgba(0,0,0,0.4); border-radius: 0 0 8px 0; }
+    .layout-ribbon .card-center { margin-top: 26px; }
+
+    /* 16. MINIMALIS — banyak ruang kosong, elemen dikecilkan, fokus ke judul saja */
+    .layout-minimal .card-center { margin: auto 0; gap: 16px; }
+    .layout-minimal .preview-category { opacity: 0.7; font-size: 10px; }
+    .layout-minimal .preview-headline { font-size: 24px; font-weight: 600; }
+    .layout-minimal .preview-explanation { font-size: 12.5px; opacity: 0.85; }
+    .layout-minimal .preview-legal { background: transparent !important; border-left-width: 2px; padding-left: 10px; }
+
+    /* 17. LINI MASA (TIMELINE) — dasar hukum tampil seperti langkah bernomor */
+    .layout-timeline .preview-legal { position: relative; padding-left: 34px; }
+    .layout-timeline .preview-legal::before { content: "①"; position: absolute; left: 8px; top: 50%; transform: translateY(-50%); font-size: 16px; font-weight: 800; }
+
+    /* 18. POLAROID — bingkai putih tebal ala foto polaroid, teks jadi caption bawah */
+    .layout-polaroid { padding: 18px !important; }
+    .layout-polaroid .ig-canvas, .layout-polaroid { background-color: #fdfdfd; }
+    .layout-polaroid .card-content-wrap { border: 1px solid rgba(0,0,0,0.06); }
+    .layout-polaroid .card-top { padding: 8px 6px 0; }
+    .layout-polaroid .card-center { margin: auto 6px 6px; background: rgba(0,0,0,0.68); border-radius: 10px; padding: 16px; }
+    .layout-polaroid .card-bottom { padding: 8px 6px 4px; border-top: none; }
+    .layout-polaroid .preview-category, .layout-polaroid .preview-headline, .layout-polaroid .preview-explanation { color: #fff !important; text-shadow: none; }
+
+    /* 19. DIAGONAL SPLIT — potongan warna diagonal membelah kartu jadi dua zona */
+    .layout-split-diagonal { position: relative; }
+    .layout-split-diagonal::after { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,0.45); clip-path: polygon(0 62%, 100% 40%, 100% 100%, 0% 100%); z-index: 3; }
+    .layout-split-diagonal .card-content-wrap { justify-content: flex-end; }
+    .layout-split-diagonal .card-center { margin: 0; }
+
+    /* 20. DUOTONE TEGAS — wash warna aksen tebal + garis bawah pada judul */
+    .layout-duotone .exposure-layer { mix-blend-mode: color !important; opacity: 0.85 !important; }
+    .layout-duotone .card-content-wrap { justify-content: flex-end; }
+    .layout-duotone .card-center { margin: 0; }
+    .layout-duotone .preview-headline { display: inline-block; border-bottom: 4px solid currentColor; padding-bottom: 8px; }
+
+    /* ======================================================================
+       MODEL "FOTO DI DEPAN" (POSTER RESMI) — foto tampil penuh & tajam
+       (tidak digelapkan), logo+nama lembaga menempel di atas foto, panel
+       warna gradasi tebal di bawah untuk teks, dan tombol pil melayang
+       di kanan bawah. Cocok untuk dokumentasi sidang/kegiatan resmi.
+    ====================================================================== */
+    [class*="layout-photo-front"] .exposure-layer { opacity: 1 !important; mix-blend-mode: normal !important; filter: none !important; }
+    [class*="layout-photo-front"] .card-content-wrap { justify-content: flex-end; }
+    [class*="layout-photo-front"] .card-top { position: absolute; top: 24px; left: 24px; right: 24px; z-index: 6; }
+    [class*="layout-photo-front"] .badge-day { display: none; }
+    [class*="layout-photo-front"] .series-label { display: block; font-size: 10px; color: rgba(255,255,255,0.85); margin-top: 2px; text-shadow: 0 1px 3px rgba(0,0,0,0.8); }
+    [class*="layout-photo-front"] .card-logo-img { border-color: rgba(255,255,255,0.9); }
+    [class*="layout-photo-front"] .card-center { margin: 0; padding: 40px 22px 78px; gap: 8px; }
+    [class*="layout-photo-front"] .preview-category { font-size: 11px; font-weight: 700; opacity: 0.95; letter-spacing: 0.4px; }
+    [class*="layout-photo-front"] .preview-headline { font-size: 20px; line-height: 1.32; }
+    [class*="layout-photo-front"] .preview-explanation { font-size: 12.5px; opacity: 0.94; }
+    [class*="layout-photo-front"] .preview-legal { position: absolute; right: 22px; bottom: 26px; left: auto; display: inline-flex; align-items: center; gap: 8px; background: #ffffff; border-left: none !important; border-radius: 999px; padding: 11px 20px; font-weight: 800; font-size: 12.5px; box-shadow: 0 8px 20px rgba(0,0,0,0.4); z-index: 8; white-space: nowrap; }
+    [class*="layout-photo-front"] .card-bottom { display: none; }
+
+    /* 21. Foto Depan — Merah Maroon (seperti contoh Mahkamah Konstitusi) */
+    .layout-photo-front-red .vignette-layer { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.05) 36%, rgba(146,20,20,0.72) 58%, rgba(87,9,9,0.97) 100%) !important; }
+    .layout-photo-front-red .preview-legal { color: #7f1d1d !important; }
+
+    /* 22. Foto Depan — Biru Institusional */
+    .layout-photo-front-blue .vignette-layer { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.05) 36%, rgba(15,42,90,0.74) 58%, rgba(7,18,44,0.97) 100%) !important; }
+    .layout-photo-front-blue .preview-legal { color: #1e3a8a !important; }
+
+    /* 23. Foto Depan — Gelap Netral (resmi/formal) */
+    .layout-photo-front-dark .vignette-layer { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.1) 32%, rgba(15,15,15,0.82) 58%, rgba(0,0,0,0.98) 100%) !important; }
+    .layout-photo-front-dark .preview-legal { color: #111827 !important; }
+
+    /* 24. Foto Depan — Emas Kecoklatan */
+    .layout-photo-front-gold .vignette-layer { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.05) 36%, rgba(120,72,12,0.74) 58%, rgba(63,24,3,0.97) 100%) !important; }
+    .layout-photo-front-gold .preview-legal { color: #78350f !important; }
+
+    /* ======================================================================
+       10 MODEL "FOTO DI DEPAN" TAMBAHAN — mengikuti gaya poster referensi
+       (logo pojok kiri atas, sumber+tanggal, foto tajam penuh, panel gradasi
+       tebal di bawah, headline besar dengan kata sorotan **emas**, kredit
+       foto pojok kanan bawah). Tinggal pilih salah satu di panel "Tata Letak".
+    ====================================================================== */
+
+    /* 25. Foto Depan — Hitam & Emas (paling mendekati contoh poster: KPK/lembaga) */
+    .layout-photo-front-black-gold .vignette-layer { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.08) 30%, rgba(10,10,10,0.88) 56%, rgba(0,0,0,0.99) 100%) !important; }
+    .layout-photo-front-black-gold .preview-category { color: #f5c518 !important; font-weight: 800; }
+    .layout-photo-front-black-gold .preview-headline { color: #ffffff !important; }
+    .layout-photo-front-black-gold .preview-legal { color: #1a1400 !important; background: #f5c518 !important; }
+
+    /* 26. Foto Depan — Hijau Institusi (Kejaksaan/Lembaga Hukum) */
+    .layout-photo-front-green .vignette-layer { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.06) 34%, rgba(6,78,59,0.78) 58%, rgba(2,44,34,0.97) 100%) !important; }
+    .layout-photo-front-green .preview-legal { color: #064e3b !important; }
+
+    /* 27. Foto Depan — Ungu Yudikatif (Pengadilan/MK) */
+    .layout-photo-front-purple .vignette-layer { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.06) 34%, rgba(76,29,149,0.78) 58%, rgba(36,7,62,0.97) 100%) !important; }
+    .layout-photo-front-purple .preview-legal { color: #4c1d95 !important; }
+
+    /* 28. Foto Depan — Tosca Anti-Korupsi (khas isu KPK) */
+    .layout-photo-front-teal .vignette-layer { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.06) 34%, rgba(15,118,110,0.78) 58%, rgba(3,43,40,0.97) 100%) !important; }
+    .layout-photo-front-teal .preview-legal { color: #0f766e !important; }
+
+    /* 29. Foto Depan — Oranye Siaga (berita darurat/peringatan) */
+    .layout-photo-front-orange .vignette-layer { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.05) 34%, rgba(154,52,18,0.78) 58%, rgba(67,20,7,0.97) 100%) !important; }
+    .layout-photo-front-orange .preview-legal { color: #9a3412 !important; }
+
+    /* 30. Foto Depan — Merah Tegas (penindakan/operasi hukum) */
+    .layout-photo-front-crimson .vignette-layer { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.06) 32%, rgba(26,0,0,0.85) 58%, rgba(0,0,0,0.98) 100%) !important; }
+    .layout-photo-front-crimson .preview-category { color: #f87171 !important; }
+    .layout-photo-front-crimson .preview-legal { color: #7f1d1d !important; }
+
+    /* 31. Foto Depan — Biru Dongker Formal (kepolisian/institusi negara) */
+    .layout-photo-front-navy .vignette-layer { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.06) 34%, rgba(15,23,42,0.85) 58%, rgba(3,7,18,0.98) 100%) !important; }
+    .layout-photo-front-navy .preview-legal { color: #0f172a !important; }
+
+    /* 32. Foto Depan — Abu Baja Netral (rilis pers/konferensi) */
+    .layout-photo-front-steel .vignette-layer { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.06) 34%, rgba(63,75,92,0.8) 58%, rgba(18,24,31,0.97) 100%) !important; }
+    .layout-photo-front-steel .preview-legal { color: #334155 !important; }
+
+    /* 33. Foto Depan — Putih Bersih (siang hari/formal terang) */
+    .layout-photo-front-white .vignette-layer { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(255,255,255,0.05) 32%, rgba(255,255,255,0.88) 58%, rgba(255,255,255,0.99) 100%) !important; }
+    .layout-photo-front-white .preview-category { color: #0f172a !important; opacity: 1; }
+    .layout-photo-front-white .preview-headline, .layout-photo-front-white .preview-explanation { color: #0f172a !important; text-shadow: none !important; }
+    .layout-photo-front-white .preview-legal { color: #ffffff !important; background: #0f172a !important; }
+
+    /* 34. Foto Depan — Coklat Institusional (dokumen/arsip resmi) */
+    .layout-photo-front-brown .vignette-layer { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.05) 36%, rgba(69,26,3,0.78) 58%, rgba(28,10,2,0.97) 100%) !important; }
+    .layout-photo-front-brown .preview-legal { color: #451a03 !important; }
 
     /* MODAL */
     .modal-backdrop { display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.82); backdrop-filter: blur(4px); z-index: 200; justify-content: center; align-items: center; padding: 20px; }
@@ -917,6 +1135,10 @@
       <div class="form-group">
         <label>Headline Hook (Judul Postingan IG):</label>
         <input type="text" class="form-control" id="inputHeadline">
+        <p style="font-size: 10.5px; color: var(--text-muted); margin-top: 5px;">
+          Tip: apit kata dengan <strong>**dua bintang**</strong> untuk membuatnya kuning tebal, contoh:
+          <code>KPK GELEDAH RUMAH BAK **ISTANA** MILIK **INTEL POLSEK**</code>
+        </p>
       </div>
 
       <div class="form-group">
@@ -977,6 +1199,47 @@
         </div>
       </div>
 
+      <!-- 20 MODEL LAYOUT -->
+      <div class="form-group">
+        <label>Model Tata Letak Kartu (24 Pilihan) — ubah komposisi, bukan cuma warna:</label>
+        <div class="theme-grid" id="layoutGrid">
+          <div class="theme-opt active" onclick="setLayout('classic', this)"><i class="fa-solid fa-align-center"></i>Klasik Tengah</div>
+          <div class="theme-opt" onclick="setLayout('caption-bottom', this)"><i class="fa-solid fa-image"></i>Caption Bawah</div>
+          <div class="theme-opt" onclick="setLayout('headline-top', this)"><i class="fa-solid fa-heading"></i>Headline Atas</div>
+          <div class="theme-opt" onclick="setLayout('glass', this)"><i class="fa-solid fa-water"></i>Kaca Buram</div>
+          <div class="theme-opt" onclick="setLayout('bold-banner', this)"><i class="fa-solid fa-flag"></i>Banner Tebal</div>
+          <div class="theme-opt" onclick="setLayout('side-tab', this)"><i class="fa-solid fa-tag"></i>Tab Samping</div>
+          <div class="theme-opt" onclick="setLayout('frame-elegant', this)"><i class="fa-regular fa-square"></i>Bingkai Elegan</div>
+          <div class="theme-opt" onclick="setLayout('magazine', this)"><i class="fa-solid fa-newspaper"></i>Majalah</div>
+          <div class="theme-opt" onclick="setLayout('quote', this)"><i class="fa-solid fa-quote-left"></i>Kutipan</div>
+          <div class="theme-opt" onclick="setLayout('newspaper', this)"><i class="fa-brands fa-readme"></i>Koran</div>
+          <div class="theme-opt" onclick="setLayout('stat-number', this)"><i class="fa-solid fa-chart-simple"></i>Angka Statistik</div>
+          <div class="theme-opt" onclick="setLayout('alert', this)"><i class="fa-solid fa-triangle-exclamation"></i>Peringatan</div>
+          <div class="theme-opt" onclick="setLayout('neon', this)"><i class="fa-solid fa-bolt"></i>Neon Glow</div>
+          <div class="theme-opt" onclick="setLayout('corner-badge', this)"><i class="fa-solid fa-certificate"></i>Lencana Sudut</div>
+          <div class="theme-opt" onclick="setLayout('ribbon', this)"><i class="fa-solid fa-award"></i>Pita Ribbon</div>
+          <div class="theme-opt" onclick="setLayout('minimal', this)"><i class="fa-solid fa-minus"></i>Minimalis</div>
+          <div class="theme-opt" onclick="setLayout('timeline', this)"><i class="fa-solid fa-list-ol"></i>Lini Masa</div>
+          <div class="theme-opt" onclick="setLayout('polaroid', this)"><i class="fa-solid fa-camera-retro"></i>Polaroid</div>
+          <div class="theme-opt" onclick="setLayout('split-diagonal', this)"><i class="fa-solid fa-diamond"></i>Diagonal Split</div>
+          <div class="theme-opt" onclick="setLayout('duotone', this)"><i class="fa-solid fa-droplet"></i>Duotone Tegas</div>
+          <div class="theme-opt" onclick="setLayout('photo-front-red', this)"><i class="fa-solid fa-gavel"></i>Foto Depan Merah</div>
+          <div class="theme-opt" onclick="setLayout('photo-front-blue', this)"><i class="fa-solid fa-landmark"></i>Foto Depan Biru</div>
+          <div class="theme-opt" onclick="setLayout('photo-front-dark', this)"><i class="fa-solid fa-building-columns"></i>Foto Depan Gelap</div>
+          <div class="theme-opt" onclick="setLayout('photo-front-gold', this)"><i class="fa-solid fa-scroll"></i>Foto Depan Emas</div>
+          <div class="theme-opt" onclick="setLayout('photo-front-black-gold', this)"><i class="fa-solid fa-star"></i>Foto Depan Hitam-Emas</div>
+          <div class="theme-opt" onclick="setLayout('photo-front-green', this)"><i class="fa-solid fa-seedling"></i>Foto Depan Hijau Institusi</div>
+          <div class="theme-opt" onclick="setLayout('photo-front-purple', this)"><i class="fa-solid fa-gavel"></i>Foto Depan Ungu Yudikatif</div>
+          <div class="theme-opt" onclick="setLayout('photo-front-teal', this)"><i class="fa-solid fa-magnifying-glass-dollar"></i>Foto Depan Tosca Anti-Korupsi</div>
+          <div class="theme-opt" onclick="setLayout('photo-front-orange', this)"><i class="fa-solid fa-triangle-exclamation"></i>Foto Depan Oranye Siaga</div>
+          <div class="theme-opt" onclick="setLayout('photo-front-crimson', this)"><i class="fa-solid fa-handcuffs"></i>Foto Depan Merah Tegas</div>
+          <div class="theme-opt" onclick="setLayout('photo-front-navy', this)"><i class="fa-solid fa-shield-halved"></i>Foto Depan Biru Dongker</div>
+          <div class="theme-opt" onclick="setLayout('photo-front-steel', this)"><i class="fa-solid fa-microphone-lines"></i>Foto Depan Abu Baja</div>
+          <div class="theme-opt" onclick="setLayout('photo-front-white', this)"><i class="fa-regular fa-file-lines"></i>Foto Depan Putih Bersih</div>
+          <div class="theme-opt" onclick="setLayout('photo-front-brown', this)"><i class="fa-solid fa-box-archive"></i>Foto Depan Coklat Arsip</div>
+        </div>
+      </div>
+
       <!-- 25 TEMA -->
       <div class="form-group">
         <label>Pilihan Tema Warna Visual (25 Pilihan):</label>
@@ -1006,12 +1269,13 @@
           <div class="theme-opt" onclick="setTheme('pine-green', this)"><div class="color-swatch" style="background:#052e16"></div>Pine Green</div>
           <div class="theme-opt" onclick="setTheme('copper-bronze', this)"><div class="color-swatch" style="background:#7c4a1e"></div>Copper Bronze</div>
           <div class="theme-opt" onclick="setTheme('ivory-cream', this)"><div class="color-swatch" style="background:#fdf6e3"></div>Ivory Cream</div>
+          <div class="theme-opt" onclick="setTheme('golden-authority', this)"><div class="color-swatch" style="background:#000000;border:1px solid #f5c518"></div>Emas Otoritas</div>
         </div>
       </div>
 
       <!-- 15 FONT -->
       <div class="form-group">
-        <label>Pilihan Font Kartu (15 Pilihan + Default):</label>
+        <label>Pilihan Font Kartu (16 Pilihan + Default):</label>
         <div class="font-grid">
           <div class="font-opt active" style="font-family:'Segoe UI',sans-serif" onclick="setFont('default', this)">Default</div>
           <div class="font-opt" style="font-family:'Poppins',sans-serif" onclick="setFont('poppins', this)">Poppins</div>
@@ -1029,6 +1293,7 @@
           <div class="font-opt" style="font-family:'Inter',sans-serif" onclick="setFont('inter', this)">Inter</div>
           <div class="font-opt" style="font-family:'Plus Jakarta Sans',sans-serif" onclick="setFont('jakarta', this)">Jakarta Sans</div>
           <div class="font-opt" style="font-family:'Libre Baskerville',serif" onclick="setFont('baskerville', this)">Baskerville</div>
+          <div class="font-opt" style="font-family:'Archivo Black',sans-serif" onclick="setFont('archivo-black', this)">Archivo Black</div>
         </div>
       </div>
     </section>
@@ -1372,6 +1637,7 @@
     let currentLogoUrl = defaultLogoSvg;
     let currentThemeName = "emerald";
     let currentFontName = "default";
+    let currentLayoutName = "classic";
 
     // INISIALISASI
     window.addEventListener('DOMContentLoaded', () => {
@@ -1395,6 +1661,9 @@
         if (s.activeFont) {
           currentFontName = s.activeFont;
         }
+        if (s.activeLayout) {
+          currentLayoutName = s.activeLayout;
+        }
         if (s.opacity !== undefined) document.getElementById('exposureOpacity').value = s.opacity;
         if (s.blendMode !== undefined) document.getElementById('blendModeSelect').value = s.blendMode;
         if (s.blur !== undefined) document.getElementById('exposureBlur').value = s.blur;
@@ -1411,6 +1680,7 @@
       loadDayToEditor(currentSelectedIndex);
       setTheme(currentThemeName);
       setFont(currentFontName);
+      setLayout(currentLayoutName);
 
       if (customExposureImg) {
         const layer = document.getElementById('cardExposureLayer');
@@ -1551,6 +1821,20 @@
     }
 
     // UPDATE REAL-TIME (JIKA TEKS KOSONG, KOTAK HILANG)
+    // Ubah **kata** pada Headline menjadi <span class="hl-word"> berwarna emas,
+    // meniru gaya poster referensi (mis: "RUMAH BAK ISTANA" tampil kuning tebal).
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+    }
+
+    function renderHighlightedHeadline(rawText) {
+      const escaped = escapeHtml(rawText || '');
+      return escaped.replace(/\*\*(.+?)\*\*/g, '<span class="hl-word">$1</span>');
+    }
+
     function updateLivePreview() {
       const dayInputVal = document.getElementById('inputDayLabel').value.trim();
       const badgeDayEl = document.getElementById('previewDayBadge');
@@ -1583,7 +1867,7 @@
         catEl.style.display = 'none';
       }
 
-      document.getElementById('previewHeadline').innerText = document.getElementById('inputHeadline').value;
+      document.getElementById('previewHeadline').innerHTML = renderHighlightedHeadline(document.getElementById('inputHeadline').value);
       document.getElementById('previewExplanation').innerText = document.getElementById('inputExplanation').value;
 
       const legalVal = document.getElementById('inputLegal').value.trim();
@@ -1657,7 +1941,20 @@
     function applyCanvasClasses() {
       const canvas = document.getElementById('igCanvas');
       const fontClass = (currentFontName && currentFontName !== 'default') ? ` font-${currentFontName}` : '';
-      canvas.className = `ig-canvas theme-${currentThemeName}${fontClass}`;
+      const layoutClass = ` layout-${currentLayoutName || 'classic'}`;
+      canvas.className = `ig-canvas theme-${currentThemeName}${fontClass}${layoutClass}`;
+    }
+
+    function setLayout(layoutName, el) {
+      currentLayoutName = layoutName;
+      applyCanvasClasses();
+      document.querySelectorAll('#layoutGrid .theme-opt').forEach(opt => {
+        opt.classList.remove('active');
+        if (opt.getAttribute('onclick') && opt.getAttribute('onclick').includes(`'${layoutName}'`)) {
+          opt.classList.add('active');
+        }
+      });
+      if (el) el.classList.add('active');
     }
 
     function setTheme(themeName, el) {
@@ -1826,6 +2123,7 @@ ${hashtags}`;
         currentSelectedIndex: currentSelectedIndex,
         activeTheme: currentThemeName,
         activeFont: currentFontName,
+        activeLayout: currentLayoutName,
         currentLogoUrl: currentLogoUrl,
         customExposureImg: customExposureImg,
         opacity: document.getElementById('exposureOpacity').value,
