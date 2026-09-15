@@ -1100,7 +1100,15 @@
           </div>
         </div>
 
-        <!-- Baris 3: Blur & Reset -->
+        <!-- Baris 3: Kepekatan Gradasi/Vignette -->
+        <div class="control-row">
+          <div class="range-control">
+            <span>Kepekatan Gradasi/Vignette: <strong id="vignetteOpacityVal" style="color: var(--primary);">100%</strong></span>
+            <input type="range" class="range-slider" id="vignetteOpacity" min="0" max="100" value="100" oninput="updateExposureStyle()">
+          </div>
+        </div>
+
+        <!-- Baris 4: Blur & Reset -->
         <div class="control-row">
           <div class="range-control">
             <span>Efek Halus / Blur: <strong id="blurVal" style="color: var(--primary);">0px</strong></span>
@@ -1124,6 +1132,33 @@
         <div>
           <label>Pilar Konten / Seri:</label>
           <input type="text" class="form-control" id="inputPillar" placeholder="e.g. #MELEKHUKUM">
+        </div>
+      </div>
+
+      <div class="form-group" style="display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 8px; padding: 9px 12px;">
+        <input type="checkbox" id="toggleTopBrand" checked onchange="toggleTopBrandVisibility()" style="width: 15px; height: 15px; accent-color: var(--primary); cursor: pointer;">
+        <label for="toggleTopBrand" style="margin: 0; font-size: 12px; cursor: pointer;">Tampilkan Logo & Watermark di Pojok Kiri Atas (matikan untuk menyembunyikannya)</label>
+      </div>
+
+      <!-- GESER POSISI LOGO & WATERMARK -->
+      <div class="form-group" style="background: rgba(212, 175, 55, 0.06); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 9px; padding: 12px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <label style="margin: 0; color: var(--gold); display: flex; align-items: center; gap: 6px;">
+            <i class="fa-solid fa-arrows-up-down-left-right"></i> Geser Posisi Logo & Watermark
+          </label>
+          <button type="button" class="btn btn-outline" style="font-size: 11px; padding: 3px 8px;" onclick="resetLogoPosition()">
+            <i class="fa-solid fa-rotate-left"></i> Reset
+          </button>
+        </div>
+        <div class="control-row">
+          <div class="range-control">
+            <span>Geser Kanan/Kiri: <strong id="logoOffsetXVal" style="color: var(--primary);">0px</strong></span>
+            <input type="range" class="range-slider" id="logoOffsetX" min="-40" max="260" value="0" oninput="updateLogoPosition()">
+          </div>
+          <div class="range-control">
+            <span>Geser Bawah/Atas: <strong id="logoOffsetYVal" style="color: var(--primary);">0px</strong></span>
+            <input type="range" class="range-slider" id="logoOffsetY" min="-20" max="340" value="0" oninput="updateLogoPosition()">
+          </div>
         </div>
       </div>
 
@@ -1311,7 +1346,7 @@
 
         <div class="card-content-wrap">
           <div class="card-top">
-            <div class="brand-header-wrap">
+            <div class="brand-header-wrap" id="topBrandCluster">
               <img src="" class="card-logo-img" id="cardLogoTop" alt="Logo LBH Cakra">
               <!-- BADGE HARI (OTOMATIS HILANG SAAT KOSONG) -->
               <span class="badge-day" id="previewDayBadge">HARI 01</span>
@@ -1353,12 +1388,12 @@
         Unggah file CSV atau JSON hasil editan Anda. Semua data baru termasuk <strong>Narasi Detail</strong> dan <strong>Prompt Gambar AI</strong> akan langsung dimuat ke editor dan kanvas Instagram.
       </p>
       
-      <div class="drop-zone" onclick="document.getElementById('fileUploadInput').click()">
+      <label class="drop-zone" for="fileUploadInput" style="display: block;">
         <i class="fa-solid fa-cloud-arrow-up" style="font-size: 34px; color: var(--primary); margin-bottom: 8px;"></i>
         <p style="font-size: 13px; font-weight: 600;">Klik untuk memilih file CSV / JSON</p>
         <span style="font-size: 11px; color: var(--text-muted);">Mendukung format CSV koma / titik koma dari Excel & Google Sheets</span>
-      </div>
-      <input type="file" id="fileUploadInput" accept=".json, .csv" style="display: none;" onchange="handleFileUpload(event)">
+      </label>
+      <input type="file" id="fileUploadInput" accept=".json,.csv" style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;" onchange="handleFileUpload(event)">
 
       <div style="border-top: 1px solid var(--border-color); padding-top: 12px; margin-top: 6px;">
         <p style="font-size: 11.5px; color: var(--text-muted); margin-bottom: 8px;">Belum punya template CSV? Unduh template resmi siap edit:</p>
@@ -1667,8 +1702,12 @@
         if (s.opacity !== undefined) document.getElementById('exposureOpacity').value = s.opacity;
         if (s.blendMode !== undefined) document.getElementById('blendModeSelect').value = s.blendMode;
         if (s.blur !== undefined) document.getElementById('exposureBlur').value = s.blur;
+        if (s.vignetteOpacity !== undefined) document.getElementById('vignetteOpacity').value = s.vignetteOpacity;
         if (s.vignetteMode !== undefined) document.getElementById('bgVignetteMode').value = s.vignetteMode;
         if (s.bgPreset !== undefined) document.getElementById('bgPresetSelect').value = s.bgPreset;
+        if (s.topBrandVisible !== undefined) document.getElementById('toggleTopBrand').checked = s.topBrandVisible;
+        if (s.logoOffsetX !== undefined) document.getElementById('logoOffsetX').value = s.logoOffsetX;
+        if (s.logoOffsetY !== undefined) document.getElementById('logoOffsetY').value = s.logoOffsetY;
       }
 
       if (!contentLibrary || contentLibrary.length === 0) {
@@ -1681,6 +1720,8 @@
       setTheme(currentThemeName);
       setFont(currentFontName);
       setLayout(currentLayoutName);
+      toggleTopBrandVisibility();
+      updateLogoPosition();
 
       if (customExposureImg) {
         const layer = document.getElementById('cardExposureLayer');
@@ -1713,6 +1754,29 @@
         reader.readAsDataURL(file);
       }
       e.target.value = '';
+    }
+
+    // TOMBOL SEMBUNYIKAN/TAMPILKAN LOGO & WATERMARK POJOK KIRI ATAS
+    function toggleTopBrandVisibility() {
+      const cluster = document.getElementById('topBrandCluster');
+      const show = document.getElementById('toggleTopBrand').checked;
+      if (cluster) cluster.style.display = show ? 'flex' : 'none';
+    }
+
+    // GESER POSISI LOGO & WATERMARK (DRAG VIA SLIDER)
+    function updateLogoPosition() {
+      const x = document.getElementById('logoOffsetX').value;
+      const y = document.getElementById('logoOffsetY').value;
+      document.getElementById('logoOffsetXVal').innerText = x + 'px';
+      document.getElementById('logoOffsetYVal').innerText = y + 'px';
+      const cluster = document.getElementById('topBrandCluster');
+      if (cluster) cluster.style.transform = `translate(${x}px, ${y}px)`;
+    }
+
+    function resetLogoPosition() {
+      document.getElementById('logoOffsetX').value = 0;
+      document.getElementById('logoOffsetY').value = 0;
+      updateLogoPosition();
     }
 
     // UPLOAD FOTO BACKGROUND
@@ -1909,9 +1973,11 @@
       const blendMode = document.getElementById('blendModeSelect').value;
       const blur = document.getElementById('exposureBlur').value;
       const vignetteMode = document.getElementById('bgVignetteMode').value;
+      const vignetteOpacity = document.getElementById('vignetteOpacity').value;
 
       document.getElementById('opacityVal').innerText = opacity + "%";
       document.getElementById('blurVal').innerText = blur + "px";
+      document.getElementById('vignetteOpacityVal').innerText = vignetteOpacity + "%";
 
       const layer = document.getElementById('cardExposureLayer');
       layer.style.opacity = (opacity / 100).toString();
@@ -1920,6 +1986,7 @@
 
       const vignetteLayer = document.getElementById('cardVignetteLayer');
       vignetteLayer.className = 'vignette-layer ' + (vignetteMode !== 'cinematic' ? vignetteMode : '');
+      vignetteLayer.style.opacity = (vignetteOpacity / 100).toString();
     }
 
     function applyBgPreset() {
@@ -2129,8 +2196,12 @@ ${hashtags}`;
         opacity: document.getElementById('exposureOpacity').value,
         blendMode: document.getElementById('blendModeSelect').value,
         blur: document.getElementById('exposureBlur').value,
+        vignetteOpacity: document.getElementById('vignetteOpacity').value,
         vignetteMode: document.getElementById('bgVignetteMode').value,
-        bgPreset: document.getElementById('bgPresetSelect').value
+        bgPreset: document.getElementById('bgPresetSelect').value,
+        topBrandVisible: document.getElementById('toggleTopBrand').checked,
+        logoOffsetX: document.getElementById('logoOffsetX').value,
+        logoOffsetY: document.getElementById('logoOffsetY').value
       };
 
       let htmlContent = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
